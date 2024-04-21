@@ -1,0 +1,145 @@
+.auth-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container,
+.register-container {
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: auto;
+    box-shadow: -15px -10px 300px -5px #d8bd8b ,
+    15px -10px 300px -5px #184e3d ,
+    15px 10px 300px -5px  #84183b ,
+    -15px 10px 300px -5px #86beb0 ;
+    animation: flicker 20s linear infinite;
+    padding: 25px;
+    background-color: #000;
+    background-image:url('../../assets/img/maleta.png'), url('../../assets/img/avion.png');
+    background-size: 50px 50px, 50px 50px;
+    background-repeat: no-repeat;
+    background-position: right bottom, left top;
+
+}
+@keyframes flicker {
+    0% {
+      border: 2px solid #065e44;
+      box-shadow:15px -10px 300px -5px #065e44;
+    }
+
+    25% {
+      border: 2px solid #d29421 ;
+      box-shadow: -15px -10px 300px -5px #d29421;
+    }
+  
+    50% {
+      border:2px solid #ea6a97 ;
+      box-shadow: 15px 10px 300px -5px  #ea6a97;
+    }
+  
+    75% {
+      border: 2px solid #44c8a7;
+      box-shadow: 15px 10px 300px -5px  #44c8a7;
+    }
+  
+    100% {
+      border: 2px solid #84183b;
+      box-shadow: -15px 10px 300px -5px #84183b;
+    }
+  }
+
+.register-container {
+    height: auto;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-form input {
+    width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+
+.auth-form button {
+    margin: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: .8em;
+    text-transform: uppercase;
+    padding: 0.6em 1.2em;
+    background-color: #ffeba7;
+    color: #5e6681;
+    box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
+    transition: all .3s ease-in-out;
+}
+
+.auth-form button:hover {
+    background-color: #5e6681;
+    color: #ffeba7;
+    box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}
+
+
+
+.auth-form button:disabled {
+    opacity: 0.3;
+}
+
+.auth-form-label {
+    width: 410px;
+    font-weight: 1000;
+}
+
+.auth-form-logo-container {
+    width: 75px;
+    background-color: #f5f5f5;
+}
+
+.auth-form-switch-label:hover {
+    opacity: 0.8;
+}
+
+.auth-form-validation-message {
+    width: 400px;
+    color: red;
+}
+
+.btn-link {
+    color: #f5f5f5;
+    display: block;
+    font-size: 1em;
+    transition: color .3s ease-out;
+}
+
+.btn-link:hover {
+    color: #ffeba7;
+}
+
+.title {
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #f5f5f5;
+}
