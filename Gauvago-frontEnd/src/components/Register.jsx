@@ -3,6 +3,7 @@ import { Input } from "./Input.jsx";
 import { emailValidationMessage, passConfirmValidationMessage, passwordValidationMessage, usernameValidationMessage,nameValidationMessage, surnameValidationMessage, validateEmail, validatePassConfirm, validatePassword, validateUsername, validateName, validateSurname } from "../shared/validators/validator.js";
 import { useRegister } from "../shared/hooks/useRegister.jsx";
 import logo from '../assets/img/logos.png'
+import hotelLogin from '../assets/img/hotelLogin.jpg'
 
 export const Register = ({ switchAuthAndler }) => {
     const { register, isLoading } = useRegister()
@@ -111,6 +112,7 @@ export const Register = ({ switchAuthAndler }) => {
         )
     }
     return (
+        
         <div className="register-container">
             <form
                 className="auth-form"

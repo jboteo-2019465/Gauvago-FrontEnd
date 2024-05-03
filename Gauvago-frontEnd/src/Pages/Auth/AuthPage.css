@@ -10,24 +10,25 @@
 .register-container {
     width: 500px;
     margin: 0 auto;
+    margin-right: 0px;
     border: 1px solid #ccc;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: auto;
+    height: 100%;
     box-shadow: -15px -10px 300px -5px #d8bd8b ,
     15px -10px 300px -5px #184e3d ,
     15px 10px 300px -5px  #84183b ,
     -15px 10px 300px -5px #86beb0 ;
-    animation: flicker 20s linear infinite;
+    animation: flicker 10s linear infinite;
     padding: 25px;
-    background-color: #000;
-    background-image:url('../../assets/img/maleta.png'), url('../../assets/img/avion.png');
-    background-size: 50px 50px, 50px 50px;
+    background-color: #000000;
+    background-image:url('../../assets/img/maleta.png');
+    background-size: 50px 50px;
     background-repeat: no-repeat;
-    background-position: right bottom, left top;
+    background-position: right bottom;
 
 }
 @keyframes flicker {
@@ -71,7 +72,7 @@
 .auth-form input {
     width: 100%;
   padding: 10px 0;
-  font-size: 16px;
+  font-size: 12px;
   color: #fff;
   margin-bottom: 30px;
   border: none;
@@ -108,13 +109,13 @@
 }
 
 .auth-form-label {
-    width: 410px;
+    width: 310px;
     font-weight: 1000;
 }
 
 .auth-form-logo-container {
-    width: 75px;
-    background-color: #f5f5f5;
+    width: 65px;
+    
 }
 
 .auth-form-switch-label:hover {
@@ -139,7 +140,16 @@
 
 .title {
     margin-bottom: 1rem;
-    font-size: 1.5em;
+    font-size: 16px;
     font-weight: 500;
     color: #f5f5f5;
+}
+
+.label{
+    font-size: 16px;
+}
+
+.image-log-regis{
+    margin-left: 0px;
+    width: 65px;
 }

@@ -22,7 +22,7 @@ export const Input = ({
   return (
     <>
         <div className="auth-form-label">
-            <span>{label}</span>
+            <span className='label'>{label}</span>
         </div>
         {
             textarea ? (
