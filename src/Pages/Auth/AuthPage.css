@@ -18,45 +18,46 @@
     align-items: center;
     justify-content: space-evenly;
     height: 100%;
-    box-shadow: -15px -10px 300px -5px #d8bd8b ,
-    15px -10px 300px -5px #184e3d ,
-    15px 10px 300px -5px  #84183b ,
-    -15px 10px 300px -5px #86beb0 ;
+    box-shadow: -15px -10px 300px -5px #d8bd8b,
+        15px -10px 300px -5px #184e3d,
+        15px 10px 300px -5px #84183b,
+        -15px 10px 300px -5px #86beb0;
     animation: flicker 10s linear infinite;
     padding: 25px;
     background-color: #000000;
-    background-image:url('../../assets/img/maleta.png');
+    background-image: url('../../assets/img/maleta.png');
     background-size: 50px 50px;
     background-repeat: no-repeat;
     background-position: right bottom;
 
 }
+
 @keyframes flicker {
     0% {
-      border: 2px solid #065e44;
-      box-shadow:15px -10px 300px -5px #065e44;
+        border: 2px solid #065e44;
+        box-shadow: 15px -10px 300px -5px #065e44;
     }
 
     25% {
-      border: 2px solid #d29421 ;
-      box-shadow: -15px -10px 300px -5px #d29421;
+        border: 2px solid #d29421;
+        box-shadow: -15px -10px 300px -5px #d29421;
     }
-  
+
     50% {
-      border:2px solid #ea6a97 ;
-      box-shadow: 15px 10px 300px -5px  #ea6a97;
+        border: 2px solid #ea6a97;
+        box-shadow: 15px 10px 300px -5px #ea6a97;
     }
-  
+
     75% {
-      border: 2px solid #44c8a7;
-      box-shadow: 15px 10px 300px -5px  #44c8a7;
+        border: 2px solid #44c8a7;
+        box-shadow: 15px 10px 300px -5px #44c8a7;
     }
-  
+
     100% {
-      border: 2px solid #84183b;
-      box-shadow: -15px 10px 300px -5px #84183b;
+        border: 2px solid #84183b;
+        box-shadow: -15px 10px 300px -5px #84183b;
     }
-  }
+}
 
 .register-container {
     height: auto;
@@ -70,15 +71,16 @@
 }
 
 .auth-form input {
+    font-family: inherit;
     width: 100%;
-  padding: 10px 0;
-  font-size: 12px;
-  color: #fff;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid #fff;
-  outline: none;
-  background: transparent;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
 }
 
 
@@ -115,7 +117,7 @@
 
 .auth-form-logo-container {
     width: 65px;
-    
+
 }
 
 .auth-form-switch-label:hover {
@@ -145,11 +147,11 @@
     color: #f5f5f5;
 }
 
-.label{
+.label {
     font-size: 16px;
 }
 
-.image-log-regis{
+.image-log-regis {
     margin-left: 0px;
     width: 65px;
 }
