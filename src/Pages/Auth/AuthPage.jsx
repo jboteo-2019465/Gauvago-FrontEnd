@@ -11,6 +11,7 @@ export const AuthPage = () => {
     setIsRegister((prev)=> !prev)
   }
   return (
+    
     <div className='auth-container'>
       
       {
