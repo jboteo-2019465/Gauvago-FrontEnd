@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Input } from "./Input.jsx";
 import { emailValidationMessage, passConfirmValidationMessage, passwordValidationMessage, usernameValidationMessage,nameValidationMessage, surnameValidationMessage, validateEmail, validatePassConfirm, validatePassword, validateUsername, validateName, validateSurname } from "../shared/validators/validator.js";
 import { useRegister } from "../shared/hooks/useRegister.jsx";
-import logo from '../assets/img/logos.png'
+import logo from '../assets/img/logoss.svg'
 import hotelLogin from '../assets/img/hotelLogin.jpg'
 
 export const Register = ({ switchAuthAndler }) => {

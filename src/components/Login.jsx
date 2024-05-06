@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Input } from "./Input"
 import { identifierValidationMessage, passwordValidationMessage, validateIdentifier, validatePassword } from "../shared/validators/validator"
 import { useLogin } from "../shared/hooks/useLogin"
-import logo from '../assets/img/logos.png'
+import logo from '../assets/img/logoss.svg'
 
 export const Login = ({ switchHandler }) => {
     const { login, isLoading } = useLogin()
