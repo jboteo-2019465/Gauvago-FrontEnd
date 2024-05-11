@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <AuthPage/>
-      <Toaster position='bottom-left' reverseOrder={false}/>
+      <Toaster position='bottom-right' reverseOrder={false}/>
     </>
   )
 }
