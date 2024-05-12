@@ -4,7 +4,7 @@ import { Login } from '../../components/Login.jsx'
 import { useState } from 'react'
 
 export const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
   const [isRegister, setIsRegister] = useState(false)
   const handleAuthPage = ()=>{
     setIsLogin((prev)=> !prev)

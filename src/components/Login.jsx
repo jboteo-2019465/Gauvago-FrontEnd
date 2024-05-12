@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import { Input } from "./Input"
 import { identifierValidationMessage, passwordValidationMessage, validateIdentifier, validatePassword } from "../shared/validators/validator"
 import { useLogin } from "../shared/hooks/useLogin"
@@ -6,6 +7,7 @@ import logo from '../assets/img/logoss.svg'
 
 export const Login = ({ switchHandler }) => {
     const { login, isLoading } = useLogin()
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         identifier: {
@@ -57,9 +59,8 @@ export const Login = ({ switchHandler }) => {
     const handleLogin = async (e) => {
         e.preventDefault()
         login(formData.identifier.value,
-             formData.password.value
-            
-        )
+             formData.password.value)
+             navigate('/HomePage');
     }
 
     return (

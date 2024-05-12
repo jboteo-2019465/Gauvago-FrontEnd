@@ -1,9 +1,12 @@
 .auth-container {
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("../src/assets/img/hotelLogin.jpg");
+    background-repeat: no-repeat;
+    background-size: 75%;
 }
 
 .login-container,
