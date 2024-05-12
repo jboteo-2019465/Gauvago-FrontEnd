@@ -30,7 +30,7 @@ body {
 
   /* Navbar */
 #navbar {
-    background-color: #fff;
+    background-color: #181d22 ;
 
 }
 
@@ -42,7 +42,7 @@ body {
   }
   
   #navbar h1 a {
-    color: #d8bd8b;
+    color: #fff;
   }
   
   #navbar ul {
@@ -62,7 +62,7 @@ body {
   
   #navbar ul li a.current,
   #navbar ul li a:hover {
-    color: #d8bd8b;
+    color: #fff;
   }
   .btn {
     display: inline-block;
