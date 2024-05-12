@@ -10,6 +10,7 @@ export const AppRoutes = () => {
                 <Route path="/login" element={<AuthPage />} />
                 <Route path="/register" element={<AuthPage />} />
                 <Route path="/HomePage" element={<HomePage />} />
+                <Route path="/" element={<Navigate to="/login" />} />{/*Redirigue a la pagina de login si no hay ruta especificada */}
             </Routes>
         </Router>
     );
