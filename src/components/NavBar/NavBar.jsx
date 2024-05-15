@@ -19,8 +19,8 @@ export const NavBar = () => {
   };
 
   const handleUser = async (e) => {
-    e.preventDefault()
     navigate('/UserProfile');
+    setDropdownActive(false);
 }
 
   const toggleDropdown = () => {
@@ -51,9 +51,9 @@ export const NavBar = () => {
           <button><img className='imgButton' src={imgPerfil}/></button>
           <div className={`dropdown ${dropdownActive ? 'active' : ''}`}>
             <ul className="dropdown-content">
-              <li><a onSubmit={handleUser}>Profile</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Logout</a></li>
+            <li><button className='btn' onClick={handleUser}>Profile</button></li>
+              <li><button className='btn'>Settings</button></li>
+              <li><button className='btn'>LogOut</button></li>
             </ul>
           </div>
         </div>
