@@ -32,7 +32,7 @@ img {
       rgba(44, 56, 85, 0.9),
       rgba(100, 125, 187, 0.1)
     ),
-    url("assets/header.jpg");
+    url("../.././/assets/img/hotelLogin.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
