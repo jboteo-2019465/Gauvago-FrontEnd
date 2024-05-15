@@ -9,13 +9,16 @@ export const UserProfile = () => {
       <NavBar />
       <div className="gradiant"></div>
       <div className="container-profile">
-        <div className="profile-info">
-          <div className="profile-down">
-            <img src={profileDefault} alt="Oa" />
-            <div className="profile-title">User</div>
-            <div className="profile-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, laudantium iure odio ea facere minus reiciendis enim quibusdam atque animi voluptates culpa, iste necessitatibus officia. Ipsa animi eos quo in!</div>
-          </div>
-        </div>
+      <div class="card">
+    <div class="card__img"></div>
+    <div className="card__avatar"> <img src={profileDefault} alt="Profile" />  </div>
+    <div class="card__title">Cameron Williamson</div>
+    <div class="card__subtitle">Web Development</div>
+    <div class="card__wrapper">
+        <button class="card__btn">Edit</button>
+        <button class="card__btn card__btn-solid">Delete</button>
+    </div>
+</div>
         <form className="form">
           <p className="title">Información </p>
             <label>
@@ -38,10 +41,7 @@ export const UserProfile = () => {
             <input className="input" type="password" placeholder="" required="" />
             <span>Password</span>
           </label>
-          <div className='flex'>
-            <button className="submit">Edit</button>
-            <button className="submit">Delete</button>
-          </div>
+         
 
         </form>
       </div>
