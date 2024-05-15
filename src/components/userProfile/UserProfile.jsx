@@ -16,31 +16,31 @@ export const UserProfile = () => {
             <div className="profile-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, laudantium iure odio ea facere minus reiciendis enim quibusdam atque animi voluptates culpa, iste necessitatibus officia. Ipsa animi eos quo in!</div>
           </div>
         </div>
-        <form class="form">
-          <p class="title">Información </p>
+        <form className="form">
+          <p className="title">Información </p>
             <label>
-              <input class="input" type="text" placeholder="" required="" />
+              <input className="input" type="text" placeholder="" required="" />
               <span>Name</span>
             </label>
             <label>
-              <input class="input" type="text" placeholder="" required="" />
+              <input className="input" type="text" placeholder="" required="" />
               <span>Surname</span>
             </label>
           <label>
-            <input class="input" type="email" placeholder="" required="" />
+            <input className="input" type="email" placeholder="" required="" />
             <span>Username</span>
           </label>
           <label>
-            <input class="input" type="email" placeholder="" required="" />
+            <input className="input" type="email" placeholder="" required="" />
             <span>Email</span>
           </label>
           <label>
-            <input class="input" type="password" placeholder="" required="" />
+            <input className="input" type="password" placeholder="" required="" />
             <span>Password</span>
           </label>
           <div className='flex'>
-            <button class="submit">Edit</button>
-            <button class="submit">Delete</button>
+            <button className="submit">Edit</button>
+            <button className="submit">Delete</button>
           </div>
 
         </form>
