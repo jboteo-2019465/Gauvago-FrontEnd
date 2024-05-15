@@ -26,3 +26,14 @@ export const loginRequest = async (userLogin) => {
         }
     }
 }
+
+export const registerCategoryRequest = async (category) => {
+    try {
+        return await apiClient.post('/user/login', userLogin)
+    } catch (error) {
+        return {
+            error: true,
+            errorDetails: error
+        }
+    }
+}
