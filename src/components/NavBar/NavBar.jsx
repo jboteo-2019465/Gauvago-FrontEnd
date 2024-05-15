@@ -49,9 +49,9 @@ export const NavBar = () => {
           <button><img className='imgButton' src={imgPerfil}/></button>
           <div className={`dropdown ${dropdownActive ? 'active' : ''}`}>
             <ul className="dropdown-content">
-            <li><button className='btn' onClick={handleUser}>Profile</button></li>
-              <li><button className='btn'>Settings</button></li>
-              <li><button className='btn'>LogOut</button></li>
+            <li><span className='btn-perfil' onClick={handleUser}>Profile</span></li>
+              <li><span className='btn-perfil'>Settings</span></li>
+              <li><span className='btn-perfil'>LogOut</span></li>
             </ul>
           </div>
         </div>
