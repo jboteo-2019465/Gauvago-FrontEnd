@@ -5,10 +5,10 @@ const apiClient = axios.create({
     timeout: 1000
 })
 
-export const registerRequest = async(user)=>{
-    try{
+export const registerRequest = async (user) => {
+    try {
         return await apiClient.post('/user/register', user)
-    }catch(err){
+    } catch (err) {
         return {
             error: true,
             err
@@ -37,3 +37,16 @@ export const registerCategoryRequest = async (category) => {
         }
     }
 }
+
+export const getHoteles = async () => {
+    try {
+        const response = await apiClient.get('/hotel/obtener')
+        return response.data
+        
+    } catch (err) {
+        return {
+            error: true,
+            errorDetails: err
+        }
+    }
+} 

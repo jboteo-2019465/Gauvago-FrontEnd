@@ -1,23 +1,7 @@
-import React from 'react'
-
-const HotelImg = ({ url }) => {
-    return (
-        <div className="channels-avatar-container">
-            <img
-                src={url || imageUrl}
-                width='100%'
-                height='100%'
-                alt="Channel Avatar"
-            />
-        </div>
-    )
-}
-
-export const ViewHotelPage = ({
-    //modelo de hotel
 
 
-}) => {
+export const ViewHotelPage = () => {
+    
     //handleNavigateToChannel
     return (
         <div className="channels-card" >

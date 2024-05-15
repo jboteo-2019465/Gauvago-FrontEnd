@@ -1,7 +1,13 @@
 import './Fotter.css'
 import logo from '../../assets/img/logoss.svg'
+import { useNavigate } from 'react-router-dom';
+
 
 export const Fotter = () => {
+    const navigate = useNavigate();
+    const handleHome = () => {
+        navigate('/HomePage');
+      };
     return (
         <div>
             <footer className='footer'>
@@ -12,7 +18,7 @@ export const Fotter = () => {
                         </div>
                         <div className='footer-links'>
                             <ul class="example-2">
-                                <li class="icon-content">
+                                <li className="icon-content">
                                     <a
                                         href="https://www.instagram.com/heartreachorg/"
                                         aria-label="Instagram"
@@ -42,9 +48,9 @@ export const Fotter = () => {
 
                         <div className='footer-links'>
                             <div className='subpart'>
-                                <a href=''>Home</a>
-                                <a href=''>About</a>
-                                <a href=''>Reservation</a>
+                                <span onClick={handleHome}>Home</span>
+                                <span href=''>About</span>
+                                <span href=''>Reservation</span>
                             </div>
                         </div>
                     </div>

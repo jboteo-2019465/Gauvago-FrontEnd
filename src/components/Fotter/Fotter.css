@@ -31,7 +31,7 @@
     color: #fff;
 }
 
-.footer-links a {
+.footer-links span {
     color: #fff;
     text-decoration: none;
 }
@@ -42,7 +42,7 @@
     justify-content: center;
 }
 
-.subpart a {
+.subpart span {
     margin: 20px 30px 20px 0;
     font-size: 20px;
 }

@@ -186,4 +186,20 @@
     color: var(--text-dark);
   }
 
+  @media (width > 1024px) {
+    .room__grid {
+      gap: 2rem;
+    }
+  }
+  @media (width > 576px) {
+    .room__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (width > 768px) {
+    .room__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
   
