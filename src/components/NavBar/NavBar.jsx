@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
-
-import imgPerfil from '../../assets/img/logoss.svg'
+import imgPerfil from '../../assets/img/logoss.svg';
 
 export const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -17,17 +16,21 @@ export const NavBar = () => {
     }
   };
 
-  const handleUser = async (e) => {
+  const handleUser = () => {
     navigate('/UserProfile');
     setDropdownActive(false);
-}
+  };
+
+  const handleLogout = () => {
+    // Eliminar el token de localStorage
+    localStorage.removeItem('authToken');
+    // Redirigir al usuario a la página de inicio de sesión
+    navigate('/login');
+  };
 
   const toggleDropdown = () => {
     setDropdownActive(!dropdownActive);
   };
-
-  useEffect(() => {
-  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -46,17 +49,16 @@ export const NavBar = () => {
           </ul>
         </nav>
         <div className="btn" onClick={toggleDropdown}>
-          <button><img className='imgButton' src={imgPerfil}/></button>
+          <button><img className='imgButton' src={imgPerfil} alt="Profile" /></button>
           <div className={`dropdown ${dropdownActive ? 'active' : ''}`}>
             <ul className="dropdown-content">
-            <li><span className='btn-perfil' onClick={handleUser}>Profile</span></li>
+              <li><span className='btn-perfil' onClick={handleUser}>Profile</span></li>
               <li><span className='btn-perfil'>Settings</span></li>
-              <li><span className='btn-perfil'>LogOut</span></li>
+              <li><span className='btn-perfil' onClick={handleLogout}>LogOut</span></li>
             </ul>
           </div>
         </div>
       </header>
-
-     </div>
+    </div>
   );
 };

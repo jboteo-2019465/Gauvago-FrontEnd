@@ -58,9 +58,10 @@ export const Login = ({ switchHandler }) => {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        login(formData.identifier.value,
-             formData.password.value)
-             navigate('/HomePage');
+        const success = await login(formData.identifier.value, formData.password.value)
+        if (success) {
+            navigate('/HomePage')
+        }
     }
 
     return (
