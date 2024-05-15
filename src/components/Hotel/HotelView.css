@@ -14,7 +14,7 @@ a {
   text-decoration: none;
 }
 
-img {
+.popular__card img {
   width: 100%;
   display: flex;
 }
