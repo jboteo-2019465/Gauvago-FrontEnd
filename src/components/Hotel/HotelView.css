@@ -171,4 +171,57 @@ a {
   color: var(--text-light);
 }
 
+.botonxd{
+  border: 2px solid #24b4fb;
+  background-color: #24b4fb;
+  border-radius: 0.9em;
+  padding: 0.2em 1em 0.2em 1em;
+  transition: all ease-in-out 0.2s;
+  font-size: 15px;
+ }
+
+ .botonxdspan {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+ .botonxd:hover{
+  background-color: #0071e2;
+ }
+
+ .rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: "★";
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}
+
 

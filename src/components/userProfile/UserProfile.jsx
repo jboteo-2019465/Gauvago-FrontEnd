@@ -9,26 +9,26 @@ export const UserProfile = () => {
       <NavBar />
       <div className="gradiant"></div>
       <div className="container-profile">
-      <div class="card">
-    <div class="card__img"></div>
-    <div className="card__avatar"> <img src={profileDefault} alt="Profile" />  </div>
-    <div class="card__title">Cameron Williamson</div>
-    <div class="card__subtitle">Web Development</div>
-    <div class="card__wrapper">
-        <button class="card__btn">Edit</button>
-        <button class="card__btn card__btn-solid">Delete</button>
-    </div>
-</div>
+        <div class="card">
+          <div class="card__img"></div>
+          <div className="card__avatar"> <img src={profileDefault} alt="Profile" />  </div>
+          <div class="card__title">Cameron Williamson</div>
+          <div class="card__subtitle">Web Development</div>
+          <div class="card__wrapper">
+            <button class="card__btn">Edit</button>
+            <button class="card__btn card__btn-solid">Delete</button>
+          </div>
+        </div>
         <form className="form">
           <p className="title">Información </p>
-            <label>
-              <input className="input" type="text" placeholder="" required="" />
-              <span>Name</span>
-            </label>
-            <label>
-              <input className="input" type="text" placeholder="" required="" />
-              <span>Surname</span>
-            </label>
+          <label>
+            <input className="input" type="text" placeholder="" required="" />
+            <span>Name</span>
+          </label>
+          <label>
+            <input className="input" type="text" placeholder="" required="" />
+            <span>Surname</span>
+          </label>
           <label>
             <input className="input" type="email" placeholder="" required="" />
             <span>Username</span>
@@ -41,7 +41,7 @@ export const UserProfile = () => {
             <input className="input" type="password" placeholder="" required="" />
             <span>Password</span>
           </label>
-         
+
 
         </form>
       </div>
@@ -49,5 +49,3 @@ export const UserProfile = () => {
     </div>
   )
 }
-
-
