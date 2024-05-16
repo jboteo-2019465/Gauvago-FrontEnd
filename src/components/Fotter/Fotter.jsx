@@ -51,6 +51,7 @@ export const Fotter = () => {
                                 <span onClick={handleHome}>Home</span>
                                 <span href=''>About</span>
                                 <span href=''>Reservation</span>
+                                <a href='/register-hotel'>Register Hotel</a>
                             </div>
                         </div>
                     </div>

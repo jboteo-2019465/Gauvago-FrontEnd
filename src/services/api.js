@@ -66,3 +66,38 @@ export const uploadImageRequest = async (formData) => {
         throw error; 
     }
 };
+
+export const registerHotelRequest = async (hotel) => {
+    try {
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) throw new Error('Unauthorized: Missing Token');
+        
+        // Paso 1: Verificar el token de autenticación
+        console.log("AuthToken:", authToken);
+
+        const response = await apiClient.post('/hotel/request/register', hotel, {
+            headers: {
+                Authorization: authToken
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        // Paso 3: Manejo de errores
+        console.error("Error:", error);
+
+        if (error.response && error.response.data) {
+            // Si hay una respuesta del servidor con datos de error, devolvemos esos datos
+            return {
+                error: true,
+                errorDetails: error.response.data
+            };
+        } else {
+            // Si no hay una respuesta del servidor o datos de error, devolvemos un mensaje genérico
+            return {
+                error: true,
+                errorDetails: 'Error al intentar registrar el hotel. Inténtalo de nuevo más tarde.'
+            };
+        }
+    }
+};
