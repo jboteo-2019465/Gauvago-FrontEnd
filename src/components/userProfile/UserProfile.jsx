@@ -3,28 +3,21 @@ import { NavBar } from '../NavBar/NavBar'
 import { Fotter } from '../Fotter/Fotter'
 import {useUser} from '../../shared/hooks/useUser.jsx'
 import profileDefault from '../../assets/img/defaultUser.png'
-import { getToken } from '../../utils/auth.js'
 
 export const UserProfile = () => {
   const { handleUploadImage, loading, error, imageUrl } = useUser();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    handleUploadImage(imageFile);
+};
 
-    // Obtenemos el token de autorización del almacenamiento local
-    const token = getToken();
-    console.log(token)
-
-    // Creamos un FormData para enviar la imagen al servidor
-    const formData = new FormData();
-    formData.append('image', e.target.elements.image.files[0]); // Añadimos la imagen al FormData
-
-    try {
-        // Enviamos la imagen al servidor incluyendo el token como encabezado
-        await handleUploadImage(formData, token);
-    } catch (error) {
-        console.error('Error uploading image:', error);
-    }
+const handleSubmit = (event) => {
+  event.preventDefault();
+  const formData = new FormData();
+  formData.append('image', event.target.elements.image.files[0]);
+  handleUploadImage(formData);
+  event.target.reset();
 };
 
 return (
@@ -36,7 +29,7 @@ return (
                 <div className="card__img"></div>
                 <div className="card__avatar"> 
                     {/* Mostramos la imagen de perfil del usuario */}
-                    <img src={imageUrl || profileDefault} alt="Profile" />
+                    <img src={profileDefault} alt="Profile" />
                 </div>
                 <div className="card__title">Cameron Williamson</div>
                 <div className="card__subtitle">Web Development</div>
@@ -69,7 +62,7 @@ return (
           </label>
                 <label>
                     {/* Input para seleccionar la imagen */}
-                    <input className="input" type="file" accept="image/*" name="image" />
+                    <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
                 </label>
                 <button type="submit" className="btn">Guardar</button>
             </form>

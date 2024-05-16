@@ -11,10 +11,12 @@ export const useUser = () => {
         setError(null);
 
         try {
-            const response = await uploadImageRequest(imageFile);
+            const response = await uploadImageRequest(imageFile); 
             setLoading(false);
-            setImageUrl(response.data.profileImageUrl); // Asignamos la URL de la imagen devuelta por el servidor
+            setImageUrl(response.data.imageUrl); 
+            console.log(imageUrl);
         } catch (error) {
+          console.error(error.response);
             setLoading(false);
             setError(error.response.data.message); 
         }
@@ -27,4 +29,3 @@ export const useUser = () => {
       imageUrl 
     }
 };
-

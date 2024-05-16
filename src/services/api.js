@@ -2,7 +2,7 @@ import axios from "axios"
 
 const apiClient = axios.create({
     baseURL: 'http://localhost:2622',
-    timeout: 1000
+    timeout: 30000
 })
 
 export const registerRequest = async (user) => {
@@ -51,18 +51,18 @@ export const getHoteles = async () => {
     }
 } 
 
-export const uploadImageRequest = async (imageFormData) => {
+export const uploadImageRequest = async (formData) => {
     try {
-        const response = await apiClient.post('/user/upload-image', imageFormData, {
+        const response = await apiClient.post('/user/upload-image', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization': localStorage.getItem('authToken') // Obtener el token del localStorage
             }
+            
         });
-        return response.data;
+        return response; // Devolver solo la URL de la imagen
     } catch (error) {
-        return {
-            error: true,
-            errorDetails: error
-        };
+        console.error('Error uploading image:', error);
+        throw error; 
     }
 };
