@@ -121,6 +121,7 @@ export const RegisterHotel = ({ switchHandler }) => {
     };
 
     return (
+        <div className="boddddy">
         <div className="register-hotel-container">
             <form className="auth-form" onSubmit={handleRegisterHotel}>
                 <img src={logo} alt="logo" className="auth-form-logo-container" />
@@ -201,6 +202,7 @@ export const RegisterHotel = ({ switchHandler }) => {
                     Want to register a user instead? Click here!
                 </span>
             </form>
+        </div>
         </div>
     );
 };
