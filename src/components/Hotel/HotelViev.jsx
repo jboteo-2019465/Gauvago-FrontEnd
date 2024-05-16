@@ -71,8 +71,11 @@ export const HotelView = () => {
                                 <h4>Q 1600.00</h4>
                             </div>
                             <p>MixcoYork, Guatemala</p>
+                            <div className="botonxd-container"> 
+                            </div>
                         </div>
                     </div>
+
                     <div className="popular__card">
                         <img src={ImgDefault} alt="popular hotel" />
                         <div className="popular__content">
@@ -83,11 +86,13 @@ export const HotelView = () => {
                             <p>Guatemala, Guatemala</p>
                         </div>
                     </div>
+                    
                     <div className="popular__card">
                         <img src={ImgDefault} alt="popular hotel" />
                         <div className="popular__content">
                             <div className="popular__card__header">
                                 <h4>Atlantis The Palm</h4>
+                                
                                 <h4>Q 1200.00</h4>
                             </div>
                             <p>Amatitlan, Guatemala</p>

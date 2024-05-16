@@ -1,0 +1,138 @@
+.house-details{
+    padding: 0 12%;
+}
+
+.house-title{
+    margin-top: 50px;
+}
+
+.house-title h1{
+    font-weight: 600;
+}
+
+.gallery{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 'first first . .' 'first first . .';
+    margin: 20px 0;
+}
+
+.gallery div img{
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+.gallery-img-1{
+    grid-area: first;
+}
+
+.small-details h2{
+    font-weight: 500;
+}
+
+.small-details h4{
+    text-align: right;
+    font-size: 22px;
+}
+
+.line{
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0 50px;
+}
+
+.check-form{
+    margin: 30px 0;
+    background: #ffffff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 50px;
+}
+
+.check-form label{
+    color: black;
+    display: block;
+}
+
+.check-form div{
+    padding: 20px;
+}
+
+.check-form input{
+    --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+  width: 180px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--font-color);
+  padding: 5px 10px;
+  outline: none;
+}
+
+.check-form button{
+    background: linear-gradient(to bottom, #4dc7d9 0%,#66a6ff 100%);;
+    border: 0;
+    outline: none;
+    color:  #fff;
+    padding: 18px;
+    width: 350px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.guest-field{
+    flex: 1;
+}
+
+
+
+
+
+
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+  }
+  
+  .rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    color: #666;
+  }
+  
+  .rating:not(:checked) > label:before {
+    content: '★';
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked + label:hover ~ label,
+  .rating > input:checked ~ label:hover,
+  .rating > input:checked ~ label:hover ~ label,
+  .rating > label:hover ~ input:checked ~ label {
+    color: #e58e09;
+  }
+  
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #ff9e0b;
+  }
+  
+  .rating > input:checked ~ label {
+    color: #ffa723;
+  }
