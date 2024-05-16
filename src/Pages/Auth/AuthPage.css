@@ -126,6 +126,7 @@
 .auth-form-validation-message {
     width: 400px;
     color: red;
+    background-color: #000000;
 }
 
 .btn-link {

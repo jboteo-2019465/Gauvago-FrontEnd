@@ -51,6 +51,32 @@ export const validateIdentifier = (identifier)=>{
 }
 /*--------------------- VALIDACIÓN DE IDENTIFICADOR (EMAIL O USUARIO) ---------------------------- */
 
+/*--------------------- VALIDACIÓN DE DIRECCIÓN ---------------------------- */
+export const validateAddress = (address) => {
+    return address.length > 0;
+};
+/*--------------------- VALIDACIÓN DE DIRECCIÓN ---------------------------- */
+
+/*--------------------- VALIDACIÓN DE DESCRIPCIÓN ---------------------------- */
+export const validateDescription = (description) => {
+    return description.length > 0;
+};
+/*--------------------- VALIDACIÓN DE DESCRIPCIÓN ---------------------------- */
+
+/*--------------------- VALIDACIÓN DE TELÉFONO ---------------------------- */
+export const validatePhone = (phone) => {
+    const regex = /^\d{7,14}$/;
+    return regex.test(phone);
+};
+/*--------------------- VALIDACIÓN DE TELÉFONO ---------------------------- */
+
+/*--------------------- VALIDACIÓN DE ESTRELLAS ---------------------------- */
+export const validateStars = (stars) => {
+    const starNumber = parseInt(stars, 10);
+    return starNumber >= 1 && starNumber <= 5;
+};
+/*--------------------- VALIDACIÓN DE ESTRELLAS ---------------------------- */
+
 /* --------------------- MENSAJES DE VALIDACIÓN DE CAMPOS ------------------------------ */
 export const usernameValidationMessage = 'El nombre de usuario debe ser de entre 3 y 8 caracteres, sin espacios.'
 export const passwordValidationMessage = 'La contraseña debe tener entre 6 y 12 caracteres, sin espacios'
@@ -59,4 +85,8 @@ export const emailValidationMessage = 'Por favor ingresa un correo válido'
 export const nameValidationMessage = 'Por favor ingrese un nombre valido sin numeros ni signos, sin espacios.'
 export const surnameValidationMessage = 'Por favor ingrese un apellido valido sin numeros ni signos, sin espacios.'
 export const identifierValidationMessage = 'Por favor ingrese un email o username valido, sin espacios.'
+export const descriptionValidationMessage = 'Por favor ingresa una descripción válida.';
+export const addressValidationMessage = 'Por favor ingresa una dirección válida.';
+export const phoneValidationMessage = 'Por favor ingresa un número de teléfono válido.';
+export const starsValidationMessage = 'Por favor ingresa una cantidad de estrellas válida (1-5).';
 /* --------------------- MENSAJES DE VALIDACIÓN DE CAMPOS ------------------------------ */

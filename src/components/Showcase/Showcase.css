@@ -1,7 +1,6 @@
 :root {
   --primary-color: #e82574;
   --primary-color-dark: #bc1c5c;
-  --text-dark: #0c0a09;
   --text-light: #78716c;
   --white: #ffffff;
   --max-width: 1200px;
@@ -166,7 +165,7 @@
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--text-dark);
+    color: #0c0a09;
   }
   
   .room__card p {
