@@ -101,3 +101,16 @@ export const registerHotelRequest = async (hotel) => {
         }
     }
 };
+
+export const getLoggedUser = async () => {
+    try {
+        const response = await apiClient.get('/user/getLogeed')
+        return response.data
+        
+    } catch (err) {
+        return {
+            error: true,
+            errorDetails: err
+        }
+    }
+}
