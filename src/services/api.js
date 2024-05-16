@@ -50,3 +50,19 @@ export const getHoteles = async () => {
         }
     }
 } 
+
+export const uploadImageRequest = async (imageFormData) => {
+    try {
+        const response = await apiClient.post('/user/upload-image', imageFormData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return {
+            error: true,
+            errorDetails: error
+        };
+    }
+};
