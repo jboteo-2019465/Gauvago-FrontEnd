@@ -17,6 +17,8 @@ import {
 } from "../../shared/validators/validator.js"
 import { useRegisterHotel } from "../../shared/hooks/useRegisterHotel.jsx"
 import logo from "../../assets/img/logoss.svg"
+import { NavBar } from "../NavBar/NavBar.jsx";
+import { Fotter } from "../Fotter/Fotter.jsx";
 
 export const RegisterHotel = ({ switchHandler }) => {
     const { registerHotel, isLoading } = useRegisterHotel();
@@ -122,6 +124,7 @@ export const RegisterHotel = ({ switchHandler }) => {
 
     return (
         <div className="boddddy">
+            <NavBar />
         <div className="register-hotel-container">
             <form className="auth-form" onSubmit={handleRegisterHotel}>
                 <img src={logo} alt="logo" className="auth-form-logo-container" />
@@ -203,6 +206,7 @@ export const RegisterHotel = ({ switchHandler }) => {
                 </span>
             </form>
         </div>
+        <Fotter />
         </div>
     );
 };

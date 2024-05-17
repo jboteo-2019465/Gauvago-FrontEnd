@@ -2,7 +2,7 @@ import './UserProfile.css'
 import { NavBar } from '../NavBar/NavBar'
 import { Fotter } from '../Fotter/Fotter'
 import { useUser } from '../../shared/hooks/useUser.jsx'
-import profileDefault from '../../assets/img/defaultUser.png'
+import profileDefault from '../../assets/img/userPrueba.jpg'
 
 export const UserProfile = () => {
   const { handleUploadImage, loading, error, imageUrl, user } = useUser();
@@ -21,24 +21,26 @@ export const UserProfile = () => {
   };
 
   return (
-    <div className='container'>
-        <NavBar />
+    <div className='image-background'>
+      <NavBar />
+      <div className='container'>
+
         <div className="gradiant"></div>
         <div className="container-profile">
-            <div className="card">
-                <div className="card__img"></div>
-                <div className="card__avatar"> 
-                    {/* Mostramos la imagen de perfil del usuario */}
-                    <img src={profileDefault} alt="Profile" />
-                </div>
-                <div className="card__title">Cameron Williamson</div>
-                <div className="card__subtitle">Web Development</div>
-                <div className="card__wrapper">
-                    <button className="card__btn">Edit</button>
-                    <button className="card__btn card__btn-solid">Delete</button>
-                </div>
+          <div className="card">
+            <div className="card__img"></div>
+            <div className="card__avatar">
+              {/* Mostramos la imagen de perfil del usuario */}
+              <img src={profileDefault} alt="Profile" />
             </div>
-            <form className="form" onSubmit={handleSubmit}>
+            <div className="card__title">Cameron Williamson</div>
+            <div className="card__subtitle">cameron@gmail.com</div>
+            <div className="card__wrapper">
+              <button className="card__btn">Edit</button>
+              <button className="card__btn card__btn-solid">Delete</button>
+            </div>
+          </div>
+          <form className="form" onSubmit={handleSubmit}>
             <p className="title">Información </p>
             <label>
               <input className="input" type="text" placeholder="" required="" />
@@ -48,26 +50,29 @@ export const UserProfile = () => {
               <input className="input" type="text" placeholder="" required="" />
               <span>Surname</span>
             </label>
-          <label>
-            <input className="input" type="email" placeholder="" required="" />
-            <span>Username</span>
-          </label>
-          <label>
-            <input className="input" type="email" placeholder="" required="" />
-            <span>Email</span>
-          </label>
-          <label>
-            <input className="input" type="password" placeholder="" required="" />
-            <span>Password</span>
-          </label>
-                <label>
+            <label>
+              <input className="input" type="email" placeholder="" required="" />
+              <span>Username</span>
+            </label>
+            <label>
+              <input className="input" type="email" placeholder="" required="" />
+              <span>Email</span>
+            </label>
+            <label>
+              <input className="input" type="password" placeholder="" required="" />
+              <span>Password</span>
+            </label>
+            <label>
                     {/* Input para seleccionar la imagen */}
                     <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
                 </label>
                 <button type="submit" className="btn">Guardar</button>
-            </form>
+            
+          </form>
         </div>
-        <Fotter />
+
+      </div>
+      <Fotter />
     </div>
   );
 };

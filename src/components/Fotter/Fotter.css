@@ -1,5 +1,5 @@
 .footer {
-    background-color: transparent;
+    background-color: black;
     padding: 20px 0;
     text-align: center;
 }
@@ -22,7 +22,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 300px;
     cursor: pointer;
 }
 
@@ -38,7 +37,6 @@
 
 .subpart {
     display: flex;
-    margin-left: 10%;
     justify-content: center;
 }
 
@@ -71,7 +69,6 @@ ul {
 }
 
 .example-2 .icon-content {
-    margin: 0 10px;
     position: relative;
 }
 
