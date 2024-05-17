@@ -1,26 +1,26 @@
 import './UserProfile.css'
 import { NavBar } from '../NavBar/NavBar'
 import { Fotter } from '../Fotter/Fotter'
-import {useUser} from '../../shared/hooks/useUser.jsx'
+import { useUser } from '../../shared/hooks/useUser.jsx'
 import profileDefault from '../../assets/img/defaultUser.png'
 
 export const UserProfile = () => {
-  const { handleUploadImage, loading, error, imageUrl } = useUser();
+  const { handleUploadImage, loading, error, imageUrl, user } = useUser();
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     handleUploadImage(imageFile);
-};
+  };
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  const formData = new FormData();
-  formData.append('image', event.target.elements.image.files[0]);
-  handleUploadImage(formData);
-  event.target.reset();
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('image', event.target.elements.image.files[0]);
+    handleUploadImage(formData);
+    event.target.reset();
+  };
 
-return (
+  return (
     <div className='container'>
         <NavBar />
         <div className="gradiant"></div>
@@ -69,5 +69,12 @@ return (
         </div>
         <Fotter />
     </div>
+<<<<<<< HEAD
 );
 };
+=======
+  );
+};
+
+
+>>>>>>> 4e45ac9e62e71e468d8e695be4ffa8ba3f8f3502
