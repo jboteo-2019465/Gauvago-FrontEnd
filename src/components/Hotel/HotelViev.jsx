@@ -23,27 +23,7 @@ export const HotelView = () => {
                                 </div>
                                 <p>¿Adónde vas?</p>
                             </div>
-                            <div className="form__group">
-                                <div className="input__group">
-                                    <input type="text" />
-                                    <label>Registrarse</label>
-                                </div>
-                                <p>Agregar fecha</p>
-                            </div>
-                            <div className="form__group">
-                                <div className="input__group">
-                                    <input type="text" />
-                                    <label>Verificar</label>
-                                </div>
-                                <p>Agregar fecha</p>
-                            </div>
-                            <div className="form__group">
-                                <div className="input__group">
-                                    <input type="text" />
-                                    <label>Invitados</label>
-                                </div>
-                                <p>Agregar invitados</p>
-                            </div>
+                            
                         </form>
                         <button className="btn"><i className="ri-search-line"></i></button>
                     </div>

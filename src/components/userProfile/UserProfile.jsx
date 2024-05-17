@@ -22,31 +22,6 @@ const handleSubmit = (event) => {
 
 return (
     <div className='container'>
-<<<<<<< HEAD
-      <NavBar />
-      <div className="gradiant"></div>
-      <div className="container-profile">
-        <div class="card">
-          <div class="card__img"></div>
-          <div className="card__avatar"> <img src={profileDefault} alt="Profile" />  </div>
-          <div class="card__title">Cameron Williamson</div>
-          <div class="card__subtitle">Web Development</div>
-          <div class="card__wrapper">
-            <button class="card__btn">Edit</button>
-            <button class="card__btn card__btn-solid">Delete</button>
-          </div>
-        </div>
-        <form className="form">
-          <p className="title">Información </p>
-          <label>
-            <input className="input" type="text" placeholder="" required="" />
-            <span>Name</span>
-          </label>
-          <label>
-            <input className="input" type="text" placeholder="" required="" />
-            <span>Surname</span>
-          </label>
-=======
         <NavBar />
         <div className="gradiant"></div>
         <div className="container-profile">
@@ -73,7 +48,6 @@ return (
               <input className="input" type="text" placeholder="" required="" />
               <span>Surname</span>
             </label>
->>>>>>> 80cd3a73fb3d0ae323e946137dcfa8bbea940894
           <label>
             <input className="input" type="email" placeholder="" required="" />
             <span>Username</span>
@@ -86,16 +60,6 @@ return (
             <input className="input" type="password" placeholder="" required="" />
             <span>Password</span>
           </label>
-<<<<<<< HEAD
-
-
-        </form>
-      </div>
-      <Fotter />
-    </div>
-  )
-}
-=======
                 <label>
                     {/* Input para seleccionar la imagen */}
                     <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
@@ -107,5 +71,3 @@ return (
     </div>
 );
 };
-
->>>>>>> 80cd3a73fb3d0ae323e946137dcfa8bbea940894
