@@ -74,7 +74,12 @@ export const UserProfile = () => {
       </div>
       <Fotter />
     </div>
+<<<<<<< HEAD
+);
+};
+=======
   );
 };
 
 
+>>>>>>> 4e45ac9e62e71e468d8e695be4ffa8ba3f8f3502
