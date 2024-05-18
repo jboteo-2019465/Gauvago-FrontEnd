@@ -92,7 +92,7 @@ export const HotelView = () => {
                         <img src={ImgDefault} alt="popular hotel" />
                         <div className="popular__content">
                             <div className="popular__card__header">
-                                <h4>Tikal Futura</h4>
+                                <h4>Hola zabala</h4>
                                 <h4>Q 1000.00</h4>
                             </div>
                             <p>Guatemala, Guatemala</p>
