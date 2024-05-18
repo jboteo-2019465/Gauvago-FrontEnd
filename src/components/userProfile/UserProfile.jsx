@@ -63,23 +63,16 @@ export const UserProfile = () => {
               <span>Password</span>
             </label>
             <label>
-                    {/* Input para seleccionar la imagen */}
-                    <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
-                </label>
-                <button type="submit" className="btn">Guardar</button>
-            
+              {/* Input para seleccionar la imagen */}
+              <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
+            </label>
+            <button type="submit" className="btn">Guardar</button>
+
           </form>
         </div>
 
       </div>
       <Fotter />
     </div>
-<<<<<<< HEAD
-);
-};
-=======
   );
 };
-
-
->>>>>>> 4e45ac9e62e71e468d8e695be4ffa8ba3f8f3502
