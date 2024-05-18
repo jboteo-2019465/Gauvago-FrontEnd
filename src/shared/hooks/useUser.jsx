@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getLoggedUser, uploadImageRequest } from "../../services/api.js"
+import { getLoggedUser, uploadImageRequest, updateUserRequest, deleteUserRequest } from "../../services/api.js"
+
 
 export const useUser = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(null)
 
     const handleUploadImage = async (imageFile) => {
         setLoading(true);
@@ -13,41 +14,79 @@ export const useUser = () => {
 
         try {
             const response = await uploadImageRequest(imageFile); 
-            setLoading(false);
             setImageUrl(response.data.imageUrl); 
-            console.log(imageUrl);
-        } catch (error) {
-          console.error(error.response);
             setLoading(false);
-            setError(error.response.data.message); 
+        } catch (error) {
+            setLoading(false);
+            setError(error.response?.data?.message || 'Error uploading image'); 
         }
     };
 
-    const fetcUser = async () => {
-      try {
-          const response = await getLoggedUser();
-          if (response.error) {
-              console.error('Error al obtener el usuario:', response.error)
-              return
-          }
-          console.log('user data:', response.data);
-          setUser(response.data)
-      } catch (error) {
-          console.error("Error al obtener el usuario:", error)
-      } finally {
-          setLoading(false)
-      }
-  }
+    const handleUpdateUser = async (userData) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await updateUserRequest(userData);
+            console.log(userData)
+            console.log(response)
+            setUser(response.updatedUser);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.error(error)
+            setError(error.response?.data?.message || 'Error updating user');
+        }
+    };
 
-  useEffect(() => {
-      fetcUser()
-  }, [])
+    const handleDeleteUser = async (confirmation) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await deleteUserRequest(confirmation);
+            setUser(null);
+            setLoading(false);
+            return response;
+        } catch (error) {
+            setLoading(false);
+            console.error(error)
+            setError(error.response?.data?.message || 'Error deleting user');
+        }
+    };
+
+    const fetchUser = async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await getLoggedUser();
+            if (response.error) {
+                console.error('Error al obtener el usuario:', response.error)
+                setError('Error al obtener el usuario');
+            } else {
+                console.log('User fetched:', response.data);
+                setUser(response.data);
+            }
+        } catch (error) {
+            setError("Error al obtener el usuario");
+            console.error("Error al obtener el usuario:", error)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchUser();
+    }, []);
 
     return { 
-      handleUploadImage, 
-      loading,
-      user,
-      error, 
-      imageUrl 
+        handleUploadImage, 
+        handleUpdateUser,
+        handleDeleteUser,
+        loading,
+        user,
+        error, 
+        imageUrl,
+        fetchUser
+        
     }
 };

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { getToken } from "../utils/auth"
 
 const apiClient = axios.create({
     baseURL: 'http://localhost:2622',
@@ -58,9 +59,10 @@ export const uploadImageRequest = async (formData) => {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': localStorage.getItem('authToken') // Obtener el token del localStorage
             }
-            
         });
-        return response; // Devolver solo la URL de la imagen
+
+        // Devuelve la URL de la imagen desde la respuesta del backend
+        return response.data.imageUrl;
     } catch (error) {
         console.error('Error uploading image:', error);
         throw error; 
@@ -104,13 +106,54 @@ export const registerHotelRequest = async (hotel) => {
 
 export const getLoggedUser = async () => {
     try {
-        const response = await apiClient.get('/user/getLogeed')
-        return response.data
+        const tokenUser = getToken()
+        const response = await apiClient.get('/user/getLogeed', {
+            headers: {
+                Authorization: tokenUser
+            }
+        })
+        return response
         
     } catch (err) {
         return {
             error: true,
             errorDetails: err
         }
+    }
+}
+
+export const updateUserRequest = async (userData) => {
+    try {
+      const response = await apiClient.put('/user/update', userData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': localStorage.getItem('authToken') // Obtener el token del localStorage
+        }
+    });
+      return response.data;
+    } catch (error) {
+      console.error('Error updating user:', error);
+      throw error;
+    }
+  };
+
+  export const deleteUserRequest = async (confirmation) => {
+    try {
+        const authToken = localStorage.getItem('authToken')
+        if (!authToken) throw new Error('Unauthorized: Missing Token')
+
+        const response = await apiClient.delete('/user/delete', {
+            headers: {
+                Authorization: authToken
+            },
+            data: {
+                confirmation: confirmation
+            }
+        })
+
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        throw error;
     }
 }

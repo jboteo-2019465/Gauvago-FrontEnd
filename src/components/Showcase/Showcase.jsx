@@ -4,13 +4,20 @@ import 'aos/dist/aos.css';
 import './Showcase.css';
 import imgHotel from '../../assets/img/room-2.jpg';
 import { useHotel } from '../../shared/hooks/useHotel.jsx';
+import { useNavigate } from 'react-router-dom';
+
 
 export const Showcase = () => {
   const { hotel, isLoading } = useHotel();
+  const navigate = useNavigate();
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
+
+  const handleToHotels = () =>{
+    navigate('/HotelView')
+  }
 
   console.log('Hotel in Showcase:', hotel);
 
@@ -20,7 +27,7 @@ export const Showcase = () => {
         <div className="overlay"></div>
         <div data-aos="zoom-out" className="container">
           <h1>The Perfect Base For You</h1>
-          <a href="#" className="btn btn-light">About Our Hotel's</a>
+          <span onClick={handleToHotels} className="btn btn-light">About Our Hotel's</span>
         </div>
       </div>
       <div id="reservation">

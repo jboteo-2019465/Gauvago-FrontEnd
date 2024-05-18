@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import imgPerfil from '../../assets/img/logoss.svg';
+import { getToken } from '../../utils/auth';
+import { useUser } from '../../shared/hooks/useUser.jsx';
 
 export const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownActive, setDropdownActive] = useState(false);
+  const { loading, user } = useUser();
   const navigate = useNavigate();
 
   const handleScroll = () => {
@@ -18,6 +21,7 @@ export const NavBar = () => {
 
   const handleUser = () => {
     navigate('/UserProfile');
+    getToken()
     setDropdownActive(false);
   };
 
@@ -48,8 +52,11 @@ export const NavBar = () => {
             <li><a href="#">About</a></li>
           </ul>
         </nav>
-        <div className="btn" onClick={toggleDropdown}>
-          <button><img className='imgButton' src={imgPerfil} alt="Profile" /></button>
+        {!loading && user && user.userLogged && (
+            <div>
+              <div className="btn" onClick={toggleDropdown}>
+          
+          <button><img className='imgButton' src={ user.userLogged.profileImageUrl || imgPerfil} alt="Profile" /></button>
           <div className={`dropdown ${dropdownActive ? 'active' : ''}`}>
             <ul className="dropdown-content">
               <li><span className='btn-perfil' onClick={handleUser}>Profile</span></li>
@@ -58,6 +65,9 @@ export const NavBar = () => {
             </ul>
           </div>
         </div>
+            </div>
+          )}
+        
       </header>
     </div>
   );
