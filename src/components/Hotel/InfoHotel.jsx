@@ -6,22 +6,47 @@ import { MdCleanHands } from "react-icons/md";
 import { FaLocationArrow } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { Fotter } from '../Fotter/Fotter'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GiMagicBroom } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
+import imgGa from '../../assets/img/img1.png'
+import imgG from '../../assets/img/img2.jpg'
+import imgG1 from '../../assets/img/img3.jpg'
+import imgG2 from '../../assets/img/img4.jpg'
+import imgG3 from '../../assets/img/img5.jpg'
+
+
 
 
 export const InfoHotel = () => {
     const navigate = useNavigate()
+    const [itemActive, setItemActive] = useState(0);
 
     const handleHotelView = () => {
         navigate('/HotelView')
     }
 
+    const nextItem = () => {
+        setItemActive((prevItemActive) => (prevItemActive + 1) % 5);
+    };
+
+    const prevItem = () => {
+        setItemActive((prevItemActive) =>
+            prevItemActive === 0 ? 4 : prevItemActive - 1
+        );
+    };
+
+    useEffect(() => {
+        const interval = setInterval(nextItem, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="container-infoHotel">
             <NavBar />
             <br />
+
             <br />
             <div className="house-details">
                 <div className="house-title">
@@ -45,30 +70,113 @@ export const InfoHotel = () => {
                                 </span>
                             </div>
                         </button>
-                        <h1>Hotel Los Panfilos</h1>
-                        <div>
-                            <p>Ubicacion: Peten, Guatemala, Ciudad Panfilo</p>
+
+                        <div class="slider">
+                            <div class="list">
+                                <div className={`item ${itemActive === 0 ? 'active' : ''}`}>
+                                    <img src={imgGa} />
+                                    <div class="content">
+                                        <p>Hotel</p>
+                                        <h2>Los Panfilos</h2>
+                                        <p>
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 1 ? 'active' : ''}`}>
+                                    <img src={imgG} />
+                                    <div class="content">
+
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 2 ? 'active' : ''}`}>
+                                    <img src={imgG1} />
+                                    <div class="content">
+                                        <p>design</p>
+                                        <h2>Slider 03</h2>
+                                        <p>
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 3 ? 'active' : ''}`}>
+                                    <img src={imgG2} />
+                                    <div class="content">
+                                        <p>design</p>
+                                        <h2>Slider 04</h2>
+                                        <p>
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 4 ? 'active' : ''}`}>
+                                    <img src={imgG3} />
+                                    <div class="content">
+                                        <p>design</p>
+                                        <h2>Slider 05</h2>
+                                        <p>
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arrows">
+                                <button id="prev" onClick={prevItem}>-</button>
+                                <button id="next" onClick={nextItem}>-</button>
+                            </div>
+                            <div class="thumbnail">
+                                <div className={`item ${itemActive === 0 ? 'active' : ''}`} onClick={() => setItemActive(0)}>
+                                    <img src={imgGa} />
+                                    <div class="content">
+                                        Name Slider
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 1 ? 'active' : ''}`} onClick={() => setItemActive(1)}>
+                                    <img src={imgG} />
+                                    <div class="content">
+                                        Name Slider
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 2 ? 'active' : ''}`} onClick={() => setItemActive(2)}>
+                                    <img src={imgG1} />
+                                    <div class="content">
+                                        Name Slider
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 3 ? 'active' : ''}`} onClick={() => setItemActive(3)}>
+                                    <img src={imgG2} />
+                                    <div class="content">
+                                        Name Slider
+                                    </div>
+                                </div>
+                                <div className={`item ${itemActive === 4 ? 'active' : ''}`} onClick={() => setItemActive(4)}>
+                                    <img src={imgG3} />
+                                    <div class="content">
+                                        Name Slider
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="rating">
+                                <input value="5" name="rate" id="star5" type="radio" />
+                                <label title="text" for="star5"></label>
+                                <input value="4" name="rate" id="star4" type="radio" />
+                                <label title="text" for="star4"></label>
+                                <input value="3" name="rate" id="star3" type="radio" checked="" />
+                                <label title="text" for="star3"></label>
+                                <input value="2" name="rate" id="star2" type="radio" />
+                                <label title="text" for="star2"></label>
+                                <input value="1" name="rate" id="star1" type="radio" />
+                                <label title="text" for="star1"></label>
+                            </div>
                         </div>
+
+
                     </div>
-                </div>
-                <div className='gallery'>
-                    <div className='gallery-img-1'><img src={ImgDefault} alt="" /></div>
-                    <div><img src={ImgDefault} alt="" /></div>
-                    <div><img src={ImgDefault} alt="" /></div>
-                    <div><img src={ImgDefault} alt="" /></div>
-                    <div><img src={ImgDefault} alt="" /></div>
-                </div>
-                <div className="rating">
-                    <input value="5" name="rate" id="star5" type="radio" />
-                    <label title="text" for="star5"></label>
-                    <input value="4" name="rate" id="star4" type="radio" />
-                    <label title="text" for="star4"></label>
-                    <input value="3" name="rate" id="star3" type="radio" checked="" />
-                    <label title="text" for="star3"></label>
-                    <input value="2" name="rate" id="star2" type="radio" />
-                    <label title="text" for="star2"></label>
-                    <input value="1" name="rate" id="star1" type="radio" />
-                    <label title="text" for="star1"></label>
                 </div>
                 <div className="small-details">
                     <h2>Unidad de alquiler entera - Anfitrión: Panfilo</h2>
@@ -118,6 +226,7 @@ export const InfoHotel = () => {
                     atracciones locales con la ayuda de nuestro atento personal. Ya sea que viajes por negocios o placer,
                     nuestro hotel es el destino perfecto para una experiencia inigualable.
                 </p>
+
                 <ul className="wrapper">
                     <li className="icon facebook">
                         <span className="tooltip">Facebook</span>
@@ -373,6 +482,9 @@ export const InfoHotel = () => {
 
                 </div>
                 <br />
+                <div>
+
+                </div>
             </div>
             <Fotter />
         </div>
