@@ -25,7 +25,7 @@ a {
   padding: 1rem 1rem 5rem 1rem;
 }
 
-.header__image__container {
+.header_image_container {
   position: relative;
   min-height: 500px;
   background-image: linear-gradient(
@@ -82,7 +82,7 @@ a {
   gap: 1rem;
 }
 
-.booking__container .input__group {
+.booking_container .input_group {
   width: 400%;
   position: relative;
 }
@@ -115,7 +115,7 @@ a {
   top: 0;
 }
 
-.booking__container .form__group p {
+.booking_container .form_group p {
   margin-top: 0.5rem;
   font-size: 0.8rem;
   color: var(--text-light);
@@ -155,7 +155,7 @@ a {
   padding: 1rem;
 }
 
-.popular__card__header {
+.popular_card_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -163,7 +163,7 @@ a {
   margin-bottom: 0.5rem;
 }
 
-.popular__card__header h4 {
+.popular_card_header h4 {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-dark);
@@ -296,12 +296,12 @@ a {
 }
 
 
-.container-like-img .container{
+.container-like-img .container-xdd{
   left: 75%;
   bottom: 38vh;
 }
 
-.container input {
+.container-xdd input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -309,15 +309,15 @@ a {
   width: 0;
 }
 
-.container {
+.container-xdd {
   display: block;
   position: relative;
   cursor: pointer;
   user-select: none;
 }
 
-.container svg {
-  position: relative;
+.container-xdd svg {
+  position: absolute;
   top: 0;
   left: 0;
   height: 50px;
@@ -326,11 +326,10 @@ a {
   fill: #666;
 }
 
-.container svg:hover {
+.container-xdd svg:hover {
   transform: scale(1.1);
 }
 
-.container input:checked ~ svg {
+.container-xdd input:checked ~ svg {
   fill: #E3474F;
 }
-

@@ -4,7 +4,9 @@ import { Fotter } from '../Fotter/Fotter';
 import { useEffect, useState } from 'react';
 import { useUser } from '../../shared/hooks/useUser.jsx';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 import profileDefault from '../../assets/img/defaultUser.png';
+import { useNavigate } from 'react-router-dom';
 
 export const UserProfile = () => {
   const { loading, handleUploadImage, handleUpdateUser, handleDeleteUser, error, user } = useUser();
@@ -17,6 +19,7 @@ export const UserProfile = () => {
     oldPassword: '',
     newPassword: '',
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && user.userLogged) {
@@ -67,19 +70,34 @@ export const UserProfile = () => {
       });
     }
   };
+  
 
   const handleDelete = async () => {
-    const confirmation = prompt('Please confirm the deletion by typing "yes"');
-    if (confirmation === 'yes' || confirmation === 'no') {
-      await handleDeleteUser(confirmation);
-      if (confirmation === 'yes') {
-        toast.success('Cuenta eliminada!')
-        // Puedes redirigir al usuario a otra página si lo deseas, por ejemplo:
-        // window.location.href = '/';
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'swal2-confirm',
+        cancelButton: 'swal2-cancel'
       }
-    } else {
-      alert('Please confirm the deletion by typing "yes" or "no"');
-    }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await handleDeleteUser('yes');
+          Swal.fire('Deleted!', 'Your account has been deleted.', 'success');
+          navigate('/register')
+        } catch (error) {
+          Swal.fire('Error!', 'There was an issue deleting your account.', 'error');
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your account is safe :)', 'error');
+      }
+    });
   };
 
   const handleImageChange = (event) => {
@@ -198,67 +216,9 @@ export const UserProfile = () => {
               )}
             </form>
           </div>
-
-        )}
-          <form className="form" onSubmit={handleSubmit}>
-            <p className="title">Información </p>
-            <label>
-              <input className="input" type="text" placeholder="" required="" />
-              <span>Name</span>
-            </label>
-            <label>
-              <input className="input" type="text" placeholder="" required="" />
-              <span>Surname</span>
-            </label>
-            <label>
-              <input className="input" type="email" placeholder="" required="" />
-              <span>Username</span>
-            </label>
-            <label>
-              <input className="input" type="email" placeholder="" required="" />
-              <span>Email</span>
-            </label>
-            <label>
-              <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
-            </label>
-            <button type="submit" className="btn" onClick={handleImageChange}>Guardar</button>
-            </form>
-              {editMode && (
-                <>
-                  <label>
-                    <input
-                      className="input"
-                      type="password"
-                      name="oldPassword"
-                      value={userData.oldPassword}
-                      onChange={handleInputChange}
-                    />
-                    <span>Old Password</span>
-                  </label>
-                  <label>
-                    <input
-                      className="input"
-                      type="password"
-                      name="newPassword"
-                      value={userData.newPassword}
-                      onChange={handleInputChange}
-                    />
-                    <span>New Password</span>
-                  </label>
-                  <div className="form__actions">
-                    <button type="submit" className="btn" onClick={handleSubmit}>Save</button>
-                    <button type="button" className="btn" onClick={handleCancelEdit}>Cancel</button>
-                  </div>
-                  
-                </>
-              )}
-            </form>
-          </div>
         )}
       </div>
       <Fotter />
     </div>
   );
 };
-
-

@@ -2,9 +2,18 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
-
 }
+
+.swal2-confirm {
+  background-color: green !important;
+  color: white !important;
+}
+
+.swal2-cancel {
+  background-color: red !important;
+  color: white !important;
+}
+
 
 .container {
   flex-direction: column;
