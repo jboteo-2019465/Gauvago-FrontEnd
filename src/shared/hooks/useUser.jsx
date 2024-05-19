@@ -11,7 +11,7 @@ export const useUser = () => {
     const handleUploadImage = async (imageFile) => {
         setLoading(true);
         setError(null);
-
+        
         try {
             const response = await uploadImageRequest(imageFile); 
             setImageUrl(response.data.imageUrl); 

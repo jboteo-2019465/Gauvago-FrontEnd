@@ -6,9 +6,14 @@ import { MdCleanHands } from "react-icons/md";
 import { FaLocationArrow } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { Fotter } from '../Fotter/Fotter'
+import { useNavigate } from 'react-router-dom';
 
 export const InfoHotel = () => {
+    const navigate = useNavigate()
 
+    const handleHotelView = () => {
+        navigate('/HotelView')
+    }
     return (
         <div className="container-infoHotel">
             <NavBar />
@@ -18,6 +23,24 @@ export const InfoHotel = () => {
                 <div className="house-title">
                     <br />
                     <div className="row">
+                        <button class="backButton" onClick={handleHotelView}>
+                            <div class="backButton-box">
+                                <span class="backButton-elem">
+                                    <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span class="backButton-elem">
+                                    <svg viewBox="0 0 46 40">
+                                        <path
+                                            d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+                                        ></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </button>
                         <h1>Hotel Los Panfilos</h1>
                         <div>
                             <p>Ubicacion: Peten, Guatemala, Ciudad Panfilo</p>
@@ -133,7 +156,7 @@ export const InfoHotel = () => {
 
                     <div className="card-x">
                         <div className="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="star">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="star">
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                             </svg>
 
@@ -170,7 +193,7 @@ export const InfoHotel = () => {
 
                     <div className="card-x">
                         <div className="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="star">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="star">
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                             </svg>
 
@@ -204,8 +227,9 @@ export const InfoHotel = () => {
                             — Diego Zabala
                         </div>
                     </div>
-                    
+
                 </div>
+                <br />
             </div>
             <Fotter />
         </div>

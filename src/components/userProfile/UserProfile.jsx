@@ -198,9 +198,67 @@ export const UserProfile = () => {
               )}
             </form>
           </div>
+
+        )}
+          <form className="form" onSubmit={handleSubmit}>
+            <p className="title">Información </p>
+            <label>
+              <input className="input" type="text" placeholder="" required="" />
+              <span>Name</span>
+            </label>
+            <label>
+              <input className="input" type="text" placeholder="" required="" />
+              <span>Surname</span>
+            </label>
+            <label>
+              <input className="input" type="email" placeholder="" required="" />
+              <span>Username</span>
+            </label>
+            <label>
+              <input className="input" type="email" placeholder="" required="" />
+              <span>Email</span>
+            </label>
+            <label>
+              <input className="input" type="file" accept="image/*" name="image" onChange={handleImageChange} />
+            </label>
+            <button type="submit" className="btn" onClick={handleImageChange}>Guardar</button>
+            </form>
+              {editMode && (
+                <>
+                  <label>
+                    <input
+                      className="input"
+                      type="password"
+                      name="oldPassword"
+                      value={userData.oldPassword}
+                      onChange={handleInputChange}
+                    />
+                    <span>Old Password</span>
+                  </label>
+                  <label>
+                    <input
+                      className="input"
+                      type="password"
+                      name="newPassword"
+                      value={userData.newPassword}
+                      onChange={handleInputChange}
+                    />
+                    <span>New Password</span>
+                  </label>
+                  <div className="form__actions">
+                    <button type="submit" className="btn" onClick={handleSubmit}>Save</button>
+                    <button type="button" className="btn" onClick={handleCancelEdit}>Cancel</button>
+                  </div>
+                  
+                </>
+              )}
+            </form>
+          </div>
         )}
       </div>
       <Fotter />
     </div>
   );
 };
+
+

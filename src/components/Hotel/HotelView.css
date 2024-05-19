@@ -226,4 +226,111 @@ a {
   color: #ffa723;
 }
 
+.viewHotel {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.viewHotel {
+  --primary-color: #000000;
+  --hovered-color: #c4933e;
+  position: relative;
+  display: flex;
+  font-weight: 600;
+  font-size: 20px;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.viewHotel p {
+  margin: 0;
+  position: relative;
+  font-size: 20px;
+  color: var(--primary-color);
+}
+
+.viewHotel::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  left: 0;
+  bottom: -7px;
+  background: var(--hovered-color);
+  height: 2px;
+  transition: 0.2s ease-out;
+}
+
+.viewHotel p::before {
+  position: absolute;
+  /*   box-sizing: border-box; */
+  content: "Ver Hotel";
+  width: 0%;
+  inset: 0;
+  color: var(--hovered-color);
+  overflow: hidden;
+  transition: 0.2s ease-out;
+}
+
+.viewHotel:hover::after {
+  width: 100%;
+}
+
+.viewHotel:hover p::before {
+  width: 100%;
+}
+
+.viewHotel:hover svg {
+  transform: translateX(4px);
+  color: var(--hovered-color);
+}
+
+.viewHotel svg {
+  color: var(--primary-color);
+  transition: 0.2s;
+  position: relative;
+  width: 15px;
+  transition-delay: 0.2s;
+}
+
+
+.container-like-img .container{
+  left: 75%;
+  bottom: 38vh;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.container svg {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  transition: all 0.3s;
+  fill: #666;
+}
+
+.container svg:hover {
+  transform: scale(1.1);
+}
+
+.container input:checked ~ svg {
+  fill: #E3474F;
+}
 
