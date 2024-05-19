@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GiMagicBroom } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 import imgGa from '../../assets/img/img1.png'
 import imgG from '../../assets/img/img2.jpg'
 import imgG1 from '../../assets/img/img3.jpg'
@@ -125,8 +127,8 @@ export const InfoHotel = () => {
                                 </div>
                             </div>
                             <div class="arrows">
-                                <button id="prev" onClick={prevItem}>-</button>
-                                <button id="next" onClick={nextItem}>-</button>
+                                <button id="prev" onClick={prevItem}><IoIosArrowBack /></button>
+                                <button id="next" onClick={nextItem}><IoIosArrowForward /></button>
                             </div>
                             <div class="thumbnail">
                                 <div className={`item ${itemActive === 0 ? 'active' : ''}`} onClick={() => setItemActive(0)}>
