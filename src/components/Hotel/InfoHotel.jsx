@@ -12,6 +12,9 @@ import { GiMagicBroom } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { useParams } from 'react-router-dom';
+import { useHotel } from '../../shared/hooks/useHotel.jsx';
+import { RatingComponent } from '../../assets/RatingComponent.jsx';
 import imgGa from '../../assets/img/img1.png'
 import imgG from '../../assets/img/img2.jpg'
 import imgG1 from '../../assets/img/img3.jpg'
@@ -19,11 +22,11 @@ import imgG2 from '../../assets/img/img4.jpg'
 import imgG3 from '../../assets/img/img5.jpg'
 
 
-
-
 export const InfoHotel = () => {
     const navigate = useNavigate()
+    const { id } = useParams();
     const [itemActive, setItemActive] = useState(0);
+    const { getHotel, selectedHotel, isLoading } = useHotel();
 
     const handleHotelView = () => {
         navigate('/HotelView')
@@ -40,6 +43,7 @@ export const InfoHotel = () => {
     };
 
     useEffect(() => {
+        getHotel(id)
         const interval = setInterval(nextItem, 5000);
         return () => clearInterval(interval);
     }, []);
@@ -53,138 +57,140 @@ export const InfoHotel = () => {
             <div className="house-details">
                 <div className="house-title">
                     <br />
-                    <div className="row">
-                        <button className="backButton" onClick={handleHotelView}>
-                            <div className="backButton-box">
-                                <span className="backButton-elem">
-                                    <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span className="backButton-elem">
-                                    <svg viewBox="0 0 46 40">
-                                        <path
-                                            d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
-                                        ></path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </button>
+                    {!isLoading && selectedHotel.map((hotelItem, index) => (
+                        <div key={index} className="row">
+                            <div class="slider">
+                                <div class="list">
+                                    <div className={`item ${itemActive === 0 ? 'active' : ''}`}>
+                                        <img src={imgGa} />
+                                        <div class="content">
+                                            <p>Hotel</p>
+                                            <h2>{hotelItem.nameHotel}</h2>
+                                            <p>
+                                                {hotelItem.slogan || "El lugar de tus sueños"}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={`item ${itemActive === 1 ? 'active' : ''}`}>
+                                        <img src={imgG} />
+                                        <div class="content">
+                                            <p>Hotel</p>
+                                            <h2>{hotelItem.nameHotel}</h2>
+                                            <p>
+                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                            </p>
 
-                        <div class="slider">
-                            <div class="list">
-                                <div className={`item ${itemActive === 0 ? 'active' : ''}`}>
-                                    <img src={imgGa} />
-                                    <div class="content">
-                                        <p>Hotel</p>
-                                        <h2>Los Panfilos</h2>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
-                                        </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={`item ${itemActive === 1 ? 'active' : ''}`}>
-                                    <img src={imgG} />
-                                    <div class="content">
+                                    <div className={`item ${itemActive === 2 ? 'active' : ''}`}>
+                                        <img src={imgG1} />
+                                        <div class="content">
+                                            <p>Hotel</p>
+                                            <h2>{hotelItem.nameHotel}</h2>
+                                            <p>
+                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                            </p>
 
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={`item ${itemActive === 2 ? 'active' : ''}`}>
-                                    <img src={imgG1} />
-                                    <div class="content">
-                                        <p>design</p>
-                                        <h2>Slider 03</h2>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className={`item ${itemActive === 3 ? 'active' : ''}`}>
-                                    <img src={imgG2} />
-                                    <div class="content">
-                                        <p>design</p>
-                                        <h2>Slider 04</h2>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className={`item ${itemActive === 4 ? 'active' : ''}`}>
-                                    <img src={imgG3} />
-                                    <div class="content">
-                                        <p>design</p>
-                                        <h2>Slider 05</h2>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="arrows">
-                                <button id="prev" onClick={prevItem}><IoIosArrowBack /></button>
-                                <button id="next" onClick={nextItem}><IoIosArrowForward /></button>
-                            </div>
-                            <div class="thumbnail">
-                                <div className={`item ${itemActive === 0 ? 'active' : ''}`} onClick={() => setItemActive(0)}>
-                                    <img src={imgGa} />
-                                    <div class="content">
-                                        Name Slider
-                                    </div>
-                                </div>
-                                <div className={`item ${itemActive === 1 ? 'active' : ''}`} onClick={() => setItemActive(1)}>
-                                    <img src={imgG} />
-                                    <div class="content">
-                                        Name Slider
-                                    </div>
-                                </div>
-                                <div className={`item ${itemActive === 2 ? 'active' : ''}`} onClick={() => setItemActive(2)}>
-                                    <img src={imgG1} />
-                                    <div class="content">
-                                        Name Slider
-                                    </div>
-                                </div>
-                                <div className={`item ${itemActive === 3 ? 'active' : ''}`} onClick={() => setItemActive(3)}>
-                                    <img src={imgG2} />
-                                    <div class="content">
-                                        Name Slider
-                                    </div>
-                                </div>
-                                <div className={`item ${itemActive === 4 ? 'active' : ''}`} onClick={() => setItemActive(4)}>
-                                    <img src={imgG3} />
-                                    <div class="content">
-                                        Name Slider
-                                    </div>
-                                </div>
+                                    <div className={`item ${itemActive === 3 ? 'active' : ''}`}>
+                                        <img src={imgG2} />
+                                        <div class="content">
+                                            <p>Hotel</p>
+                                            <h2>{hotelItem.nameHotel}</h2>
+                                            <p>
+                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                            </p>
 
+                                        </div>
+                                    </div>
+                                    <div className={`item ${itemActive === 4 ? 'active' : ''}`}>
+                                        <img src={imgG3} />
+                                        <div class="content">
+                                            <p>Hotel</p>
+                                            <h2>{hotelItem.nameHotel}</h2>
+                                            <p>
+                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="arrows">
+                                    <button id="prev" onClick={prevItem}><IoIosArrowBack /></button>
+                                    <button id="next" onClick={nextItem}><IoIosArrowForward /></button>
+                                </div>
+                                <div class="thumbnail">
+                                    <div className={`item ${itemActive === 0 ? 'active' : ''}`} onClick={() => setItemActive(0)}>
+                                        <img src={imgGa} />
+                                    </div>
+                                    <div className={`item ${itemActive === 1 ? 'active' : ''}`} onClick={() => setItemActive(1)}>
+                                        <img src={imgG} />
+                                    </div>
+                                    <div className={`item ${itemActive === 2 ? 'active' : ''}`} onClick={() => setItemActive(2)}>
+                                        <img src={imgG1} />
+                                    </div>
+                                    <div className={`item ${itemActive === 3 ? 'active' : ''}`} onClick={() => setItemActive(3)}>
+                                        <img src={imgG2} />
+                                    </div>
+                                    <div className={`item ${itemActive === 4 ? 'active' : ''}`} onClick={() => setItemActive(4)}>
+                                        <img src={imgG3} />
+                                    </div>
+
+                                </div>
+                                <div className="rating">
+                                {console.log(hotelItem.stars)}
+                                    {Array.from({ length: hotelItem.stars }, (_, i) => (
+                                        <>
+                                            <input
+                                                key={i}
+                                                value={i + 1}
+                                                name="rate"
+                                                id={`star${i + 1}`}
+                                                type="radio"
+                                                checked={true}
+                                            />
+                                            <label title="text"   htmlFor={`star${i + 1}`}></label>
+                                        </>
+                                    ))}
+                                    {Array.from({ length: 5 - hotelItem.stars }, (_, i) => (
+                                        <>
+                                        <input
+                                            key={i + hotelItem.stars}
+                                            value={i + 1}
+                                            name="rate"
+                                            id={`star${i + hotelItem.stars + 1}`}
+                                            type="radio"
+                                            checked={false}
+                                        />
+                                         <label title="text"  htmlFor={`star${i + 1}`}></label>
+                                        </>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="rating">
-                                <input value="5" name="rate" id="star5" type="radio" />
-                                <label title="text" for="star5"></label>
-                                <input value="4" name="rate" id="star4" type="radio" />
-                                <label title="text" for="star4"></label>
-                                <input value="3" name="rate" id="star3" type="radio" checked="" />
-                                <label title="text" for="star3"></label>
-                                <input value="2" name="rate" id="star2" type="radio" />
-                                <label title="text" for="star2"></label>
-                                <input value="1" name="rate" id="star1" type="radio" />
-                                <label title="text" for="star1"></label>
-                            </div>
+
+
                         </div>
-
-
+                    ))}
+                </div>
+                <button className="backButton" onClick={handleHotelView}>
+                    <div className="backButton-box">
+                        <span className="backButton-elem">
+                            <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+                                ></path>
+                            </svg>
+                        </span>
+                        <span className="backButton-elem">
+                            <svg viewBox="0 0 46 40">
+                                <path
+                                    d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+                                ></path>
+                            </svg>
+                        </span>
                     </div>
-                </div>
-                <div className="small-details">
-                    <h2>Unidad de alquiler entera - Anfitrión: Panfilo</h2>
-                    <p>2 guest &nbsp; &nbsp; 2 beds &nbsp; &nbsp; 1 bathroom</p>
-                    <h4>Q 1255.00 / day</h4>
-                </div>
+                </button>
                 <hr className='line' />
                 <form className='check-form'>
                     <div>
@@ -217,17 +223,13 @@ export const InfoHotel = () => {
                     </li>
                 </ul>
                 <hr className='line' />
-
-                <p className='home-desc'>
-                    Sumérgete en el encanto y la elegancia de nuestro hotel, donde la comodidad se encuentra con
-                    el lujo en cada rincón. Ubicado en el corazón de Guatemala, nuestro hotel ofrece una experiencia
-                    única que combina la sofisticación moderna con el encanto histórico de la zona. Desde nuestras
-                    lujosas habitaciones hasta nuestros servicios de primera clase, cada detalle está diseñado para
-                    superar tus expectativas y hacer que tu estancia sea inolvidable. Disfruta de una exquisita cocina
-                    en nuestro restaurante de clase mundial, relájate en nuestro spa de primera categoría o descubre las
-                    atracciones locales con la ayuda de nuestro atento personal. Ya sea que viajes por negocios o placer,
-                    nuestro hotel es el destino perfecto para una experiencia inigualable.
+                {!isLoading && selectedHotel.map((hotelItem, index) => (
+                    <p className='home-desc'>
+                    {hotelItem.description}
                 </p>
+                ))}
+
+                
 
                 <ul className="wrapper">
                     <li className="icon facebook">
@@ -487,6 +489,7 @@ export const InfoHotel = () => {
                 <div>
 
                 </div>
+                
             </div>
             <Fotter />
         </div>

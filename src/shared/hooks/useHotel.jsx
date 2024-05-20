@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { getHoteles } from "../../services/api.js";
+import { getHoteles, getHotelById } from "../../services/api.js";
 
 export const useHotel = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [hotel, setHotel] = useState([]);
+    const [selectedHotel, setSelectedHotel] = useState([]);
 
     const fetchHotels = async () => {
         try {
@@ -12,7 +13,6 @@ export const useHotel = () => {
                 console.error('Error al obtener los Hoteles:', response.error);
                 return;
             }
-            console.log('Hotel data:', response.data); // Verificar los datos obtenidos
             setHotel(response.data);
         } catch (error) {
             console.error("Error al obtener los Hoteles:", error);
@@ -20,10 +20,35 @@ export const useHotel = () => {
             setIsLoading(false);
         }
     };
+    
+
+    const getHotel = async (hotelId)=>{
+        try {
+            console.log(hotelId)
+            const response = await getHotelById(hotelId)
+            console.log(response.hotel)
+            if (response.error) {
+                console.error('Error al obtener el Hotel:', response.error);
+                return;
+            }
+            setSelectedHotel(response.hotel)
+            console.log(selectedHotel)
+        } catch (err) {
+            console.error("Error obteniendo el hotel", err)
+            
+        } finally {
+            setIsLoading(false);
+        }
+    }
+    useEffect(() => {
+        if (selectedHotel) {
+          console.log(selectedHotel);
+        }
+      }, [selectedHotel]);
 
     useEffect(() => {
         fetchHotels();
     }, []);
 
-    return { hotel, isLoading };
+    return { hotel, isLoading, getHotel, selectedHotel };
 };

@@ -63,7 +63,6 @@ export const useUser = () => {
                 console.error('Error al obtener el usuario:', response.error)
                 setError('Error al obtener el usuario');
             } else {
-                console.log('User fetched:', response.data);
                 setUser(response.data);
             }
         } catch (error) {

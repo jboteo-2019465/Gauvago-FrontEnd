@@ -25,6 +25,10 @@ a {
   padding: 1rem 1rem 5rem 1rem;
 }
 
+.section__header{
+  padding: 0 0 -50px;
+}
+
 .header_image_container {
   position: relative;
   min-height: 500px;
@@ -37,7 +41,6 @@ a {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 2rem;
 }
 
 .header__content {
@@ -295,18 +298,13 @@ a {
   transition-delay: 0.2s;
 }
 
-
-.container-like-img .container-xdd{
-  left: 75%;
-  bottom: 38vh;
-}
-
 .container-xdd input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
+  
 }
 
 .container-xdd {
@@ -317,6 +315,8 @@ a {
 }
 
 .container-xdd svg {
+  margin-top: 20px;
+  padding: 0 10px;
   position: absolute;
   top: 0;
   left: 0;

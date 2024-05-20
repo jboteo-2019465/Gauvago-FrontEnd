@@ -16,6 +16,7 @@
 
 .footer-logo img {
     width: 100px;
+    margin: 0 190px;
 }
 
 .footer-links {
@@ -38,6 +39,7 @@
 .subpart {
     display: flex;
     justify-content: center;
+    margin: 0 20px;
 }
 
 .subpart span {
@@ -65,7 +67,7 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 37%;
+    margin: 0 210px;
 }
 
 .example-2 .icon-content {

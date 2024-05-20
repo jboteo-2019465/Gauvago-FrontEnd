@@ -161,7 +161,7 @@ input:hover {
 
 #header .nav-links li {
   display: inline-block;
-  padding: 0 20px;    
+  padding: 10px 20px; 
 }
 
 #header .nav-links li:hover {
@@ -210,7 +210,6 @@ input:hover {
 .dropdown {
   position: absolute;
   top: calc(100% + 10px); /* Posiciona el menú justo debajo del botón */
-  left: 80%; /* Centra el menú horizontalmente */
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

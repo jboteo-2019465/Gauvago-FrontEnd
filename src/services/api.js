@@ -157,3 +157,33 @@ export const updateUserRequest = async (userData) => {
         throw error;
     }
 }
+
+//Obtener los departamentos
+export const getDepartments = async () => {
+    try {
+        const response = await apiClient.get('/department/obtener')
+        return response.data
+        
+    } catch (err) {
+        console.error(err)
+        return {
+            error: true,
+            
+        }
+    }
+} 
+
+//Datos de un solo hotel
+export const getHotelById = async (hotelId) => {
+    try {
+        console.log(hotelId)
+        const response = await apiClient.post('/hotel/search', {search: hotelId});
+        return response.data
+    } catch (error) {
+        console.error('Error obteniendo los detalles del hotel:', error);
+        return {
+            error: true,
+            errorDetails: error
+        };
+    }
+};
