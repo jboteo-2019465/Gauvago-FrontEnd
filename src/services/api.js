@@ -187,3 +187,21 @@ export const getHotelById = async (hotelId) => {
         };
     }
 };
+
+//Imagenes para hotel
+export const uploadImageRequestHotel = async (hotelId, formData) => {
+    try {
+        const response = await apiClient.post(`/hotel/imagenes/${hotelId}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': localStorage.getItem('authToken') // Obtener el token del localStorage
+            }
+        });
+
+        // Devuelve la respuesta del backend
+        return response.data;
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        throw error;
+    }
+};

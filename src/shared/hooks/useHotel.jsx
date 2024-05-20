@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getHoteles, getHotelById } from "../../services/api.js";
+import { getHoteles, getHotelById, uploadImageRequestHotel } from "../../services/api.js";
 
 export const useHotel = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -40,6 +40,28 @@ export const useHotel = () => {
             setIsLoading(false);
         }
     }
+
+    const uploadHotelImages = async (hotelId, files) => {
+        setIsLoading(true);
+        const formData = new FormData();
+        files.forEach(file => {
+            formData.append('image', file);
+        });
+    
+        try {
+            const response = await uploadImageRequestHotel(hotelId, formData);
+            if (response.error) {
+                console.error('Error al subir imágenes:', response.error);
+                return;
+            }
+            console.log('Imágenes subidas con éxito:', response);
+        } catch (error) {
+            console.error("Error subiendo imágenes", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
         if (selectedHotel) {
           console.log(selectedHotel);
@@ -50,5 +72,7 @@ export const useHotel = () => {
         fetchHotels();
     }, []);
 
-    return { hotel, isLoading, getHotel, selectedHotel };
+    return { hotel, isLoading, getHotel, selectedHotel, uploadHotelImages };
 };
+
+

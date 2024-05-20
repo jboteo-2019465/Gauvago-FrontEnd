@@ -8,25 +8,21 @@ import { FaHeart } from "react-icons/fa";
 import { Fotter } from '../Fotter/Fotter'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GiMagicBroom } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
+import Swal from 'sweetalert2';
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useParams } from 'react-router-dom';
 import { useHotel } from '../../shared/hooks/useHotel.jsx';
-import { RatingComponent } from '../../assets/RatingComponent.jsx';
-import imgGa from '../../assets/img/img1.png'
-import imgG from '../../assets/img/img2.jpg'
-import imgG1 from '../../assets/img/img3.jpg'
-import imgG2 from '../../assets/img/img4.jpg'
-import imgG3 from '../../assets/img/img5.jpg'
+
 
 
 export const InfoHotel = () => {
     const navigate = useNavigate()
     const { id } = useParams();
     const [itemActive, setItemActive] = useState(0);
-    const { getHotel, selectedHotel, isLoading } = useHotel();
+    const [selectedFiles, setSelectedFiles] = useState([]); // Agregar selectedFiles al estado
+    const { getHotel, selectedHotel, isLoading, uploadHotelImages } = useHotel();
 
     const handleHotelView = () => {
         navigate('/HotelView')
@@ -42,11 +38,21 @@ export const InfoHotel = () => {
         );
     };
 
+    const handleFileChange = (e) => {
+        setSelectedFiles(Array.from(e.target.files));
+    };
+
+    const handleUpload = () => {
+        if (selectedFiles.length > 0) {
+            uploadHotelImages(id, selectedFiles);
+        }
+    };
+
     useEffect(() => {
         getHotel(id)
         const interval = setInterval(nextItem, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [    ]);
 
     return (
         <div className="container-infoHotel">
@@ -62,7 +68,7 @@ export const InfoHotel = () => {
                             <div class="slider">
                                 <div class="list">
                                     <div className={`item ${itemActive === 0 ? 'active' : ''}`}>
-                                        <img src={imgGa} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                         <div class="content">
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
@@ -72,7 +78,7 @@ export const InfoHotel = () => {
                                         </div>
                                     </div>
                                     <div className={`item ${itemActive === 1 ? 'active' : ''}`}>
-                                        <img src={imgG} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                         <div class="content">
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
@@ -83,7 +89,7 @@ export const InfoHotel = () => {
                                         </div>
                                     </div>
                                     <div className={`item ${itemActive === 2 ? 'active' : ''}`}>
-                                        <img src={imgG1} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                         <div class="content">
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
@@ -94,7 +100,7 @@ export const InfoHotel = () => {
                                         </div>
                                     </div>
                                     <div className={`item ${itemActive === 3 ? 'active' : ''}`}>
-                                        <img src={imgG2} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                         <div class="content">
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
@@ -105,7 +111,7 @@ export const InfoHotel = () => {
                                         </div>
                                     </div>
                                     <div className={`item ${itemActive === 4 ? 'active' : ''}`}>
-                                        <img src={imgG3} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                         <div class="content">
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
@@ -122,24 +128,23 @@ export const InfoHotel = () => {
                                 </div>
                                 <div class="thumbnail">
                                     <div className={`item ${itemActive === 0 ? 'active' : ''}`} onClick={() => setItemActive(0)}>
-                                        <img src={imgGa} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                     </div>
                                     <div className={`item ${itemActive === 1 ? 'active' : ''}`} onClick={() => setItemActive(1)}>
-                                        <img src={imgG} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                     </div>
                                     <div className={`item ${itemActive === 2 ? 'active' : ''}`} onClick={() => setItemActive(2)}>
-                                        <img src={imgG1} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                     </div>
                                     <div className={`item ${itemActive === 3 ? 'active' : ''}`} onClick={() => setItemActive(3)}>
-                                        <img src={imgG2} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                     </div>
                                     <div className={`item ${itemActive === 4 ? 'active' : ''}`} onClick={() => setItemActive(4)}>
-                                        <img src={imgG3} />
+                                        <img src={selectedHotel.imageUrl || ImgDefault} />
                                     </div>
 
                                 </div>
                                 <div className="rating">
-                                {console.log(hotelItem.stars)}
                                     {Array.from({ length: hotelItem.stars }, (_, i) => (
                                         <>
                                             <input
@@ -173,6 +178,11 @@ export const InfoHotel = () => {
                         </div>
                     ))}
                 </div>
+                <div>
+                        <h3>Subir Imágenes del Hotel</h3>
+                        <input type="file" multiple onChange={handleFileChange} />
+                        <button onClick={handleUpload}>Subir</button>
+                    </div>
                 <button className="backButton" onClick={handleHotelView}>
                     <div className="backButton-box">
                         <span className="backButton-elem">

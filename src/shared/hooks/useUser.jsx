@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getLoggedUser, uploadImageRequest, updateUserRequest, deleteUserRequest } from "../../services/api.js"
+import { jwtDecode } from 'jwt-decode';
 
 
 export const useUser = () => {
@@ -73,6 +74,20 @@ export const useUser = () => {
         }
     }
 
+    const getIdFromToken = () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) return null;
+
+        try {
+            const decodedToken = jwtDecode(token); // Usando jwt-decode correctamente
+            return decodedToken.uid;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
+    };
+
+
     useEffect(() => {
         fetchUser();
     }, []);
@@ -85,7 +100,8 @@ export const useUser = () => {
         user,
         error, 
         imageUrl,
-        fetchUser
+        fetchUser,
+        getIdFromToken
         
     }
 };
