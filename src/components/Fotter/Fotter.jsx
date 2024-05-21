@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 export const Fotter = () => {
     const navigate = useNavigate();
+
+    const handleRegisterHotel = () => {
+        navigate('/register-hotel')
+    }
     const handleHome = () => {
         navigate('/HomePage');
       };
@@ -51,7 +55,7 @@ export const Fotter = () => {
                                 <span onClick={handleHome}>Home</span>
                                 <span href=''>About</span>
                                 <span href=''>Reservation</span>
-                                <span href='/register-hotel'>Register Hotel</span>
+                                <span onClick={handleRegisterHotel}>Register Hotel</span>
                             </div>
                         </div>
                     </div>

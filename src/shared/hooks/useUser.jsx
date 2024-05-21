@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getLoggedUser, uploadImageRequest, updateUserRequest, deleteUserRequest } from "../../services/api.js"
+import { jwtDecode } from 'jwt-decode';
 
 
 export const useUser = () => {
@@ -27,7 +28,6 @@ export const useUser = () => {
         setError(null);
         try {
             const response = await updateUserRequest(userData);
-            console.log(userData)
             console.log(response)
             setUser(response.updatedUser);
             setLoading(false);
@@ -63,7 +63,6 @@ export const useUser = () => {
                 console.error('Error al obtener el usuario:', response.error)
                 setError('Error al obtener el usuario');
             } else {
-                console.log('User fetched:', response.data);
                 setUser(response.data);
             }
         } catch (error) {
@@ -73,6 +72,20 @@ export const useUser = () => {
             setLoading(false);
         }
     }
+
+    const getIdFromToken = () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) return null;
+
+        try {
+            const decodedToken = jwtDecode(token); // Usando jwt-decode correctamente
+            return decodedToken.uid;
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+        }
+    };
+
 
     useEffect(() => {
         fetchUser();
@@ -86,7 +99,8 @@ export const useUser = () => {
         user,
         error, 
         imageUrl,
-        fetchUser
+        fetchUser,
+        getIdFromToken
         
     }
 };

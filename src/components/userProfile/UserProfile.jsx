@@ -48,7 +48,7 @@ export const UserProfile = () => {
   const handleEdit = () => {
     setEditMode(true);
     if (user && user.userLogged) {
-      console.log(editMode)
+      console.log(editMode)                                           
       setUserData({
         ...userData,
         oldPassword: '',
@@ -100,12 +100,32 @@ export const UserProfile = () => {
     });
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const imageFile = event.target.files[0];
     const formData = new FormData();
-    toast.success('¡Se a guardado tu foto de perfil!, recarga la pagina para verla')
     formData.append('image', imageFile);
-    handleUploadImage(formData);
+  
+    const { value: confirmUpload } = await Swal.fire({
+      title: 'Confirm upload',
+      text: 'Are you sure you want to upload this image?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, upload it!'
+    });
+  
+    if (confirmUpload) {
+      try {
+        
+        await handleUploadImage(formData);
+        toast.success('Your profile picture has been uploaded successfully!');
+      
+      } catch (error) {
+        console.error('Error uploading profile picture:', error);
+        toast.error('An error occurred while uploading your profile picture. Please try again later.');
+      }
+    }
   };
 
   return (
