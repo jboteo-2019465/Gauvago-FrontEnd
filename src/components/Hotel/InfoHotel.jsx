@@ -79,15 +79,15 @@ export const InfoHotel = () => {
                 <form className='check-form'>
                     <div>
                         <label>Check-in</label>
-                        <input type='text' placeholder='Add date' />
+                        <input type='date' placeholder='Add date' />
                     </div>
                     <div>
                         <label>Check-out</label>
-                        <input type='text' placeholder='Add date' />
+                        <input type='date' placeholder='Add date' />
                     </div>
                     <div className='guest-field'>
                         <label>Guest</label>
-                        <input type='text' placeholder='2 guest' />
+                        <input type='number' placeholder='2 guest' />
                     </div>
                     <button type='submit'>Check Availablity</button>
                 </form>

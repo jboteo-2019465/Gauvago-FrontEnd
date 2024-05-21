@@ -25,6 +25,11 @@ export const NavBar = () => {
     setDropdownActive(false);
   };
 
+  const handleHome = () => {
+    navigate('/HomePage')
+  };
+
+
   const handleLogout = () => {
     // Eliminar el token de localStorage
     localStorage.removeItem('authToken');
@@ -44,9 +49,10 @@ export const NavBar = () => {
   return (
     <div>
       <header id="header" className={scrolled ? 'scrolled' : ''}>
-        <h2>Gauvago</h2>
+        <h2 onClick={handleHome}>Gauvago</h2>
         <nav className='container'>
           <ul className="nav-links">
+            <li><a onClick={handleHome}>Home</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Projects</a></li>
             <li><a href="#">About</a></li>
