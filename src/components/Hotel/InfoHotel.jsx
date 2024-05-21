@@ -21,8 +21,9 @@ export const InfoHotel = () => {
     const navigate = useNavigate()
     const { id } = useParams();
     const [itemActive, setItemActive] = useState(0);
-    const [selectedFiles, setSelectedFiles] = useState([]); // Agregar selectedFiles al estado
-    const { getHotel, selectedHotel, isLoading, uploadHotelImages } = useHotel();
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const { getHotel, selectedHotel, isLoading, uploadHotelImages, getRoomsHotel, room } = useHotel();
+
 
     const handleHotelView = () => {
         navigate('/HotelView')
@@ -49,10 +50,15 @@ export const InfoHotel = () => {
     };
 
     useEffect(() => {
-        getHotel(id)
+        const fetchData = async () => {
+            await getHotel(id);
+            await getRoomsHotel(id); // Llamada a getRoomsHotel después de obtener el hotel
+        };
+
+        fetchData();
         const interval = setInterval(nextItem, 5000);
         return () => clearInterval(interval);
-    }, [    ]);
+    }, [id]);
 
     return (
         <div className="container-infoHotel">
@@ -83,7 +89,7 @@ export const InfoHotel = () => {
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
                                             <p>
-                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                                {hotelItem.slogan || "El lugar de tus sueños"}
                                             </p>
 
                                         </div>
@@ -94,7 +100,7 @@ export const InfoHotel = () => {
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
                                             <p>
-                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                                {hotelItem.slogan || "El lugar de tus sueños"}
                                             </p>
 
                                         </div>
@@ -105,7 +111,7 @@ export const InfoHotel = () => {
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
                                             <p>
-                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                                {hotelItem.slogan || "El lugar de tus sueños"}
                                             </p>
 
                                         </div>
@@ -116,7 +122,7 @@ export const InfoHotel = () => {
                                             <p>Hotel</p>
                                             <h2>{hotelItem.nameHotel}</h2>
                                             <p>
-                                            {hotelItem.slogan || "El lugar de tus sueños"}
+                                                {hotelItem.slogan || "El lugar de tus sueños"}
                                             </p>
 
                                         </div>
@@ -155,20 +161,20 @@ export const InfoHotel = () => {
                                                 type="radio"
                                                 checked={true}
                                             />
-                                            <label title="text"   htmlFor={`star${i + 1}`}></label>
+                                            <label title="text" htmlFor={`star${i + 1}`}></label>
                                         </>
                                     ))}
                                     {Array.from({ length: 5 - hotelItem.stars }, (_, i) => (
                                         <>
-                                        <input
-                                            key={i + hotelItem.stars}
-                                            value={i + 1}
-                                            name="rate"
-                                            id={`star${i + hotelItem.stars + 1}`}
-                                            type="radio"
-                                            checked={false}
-                                        />
-                                         <label title="text"  htmlFor={`star${i + 1}`}></label>
+                                            <input
+                                                key={i + hotelItem.stars}
+                                                value={i + 1}
+                                                name="rate"
+                                                id={`star${i + hotelItem.stars + 1}`}
+                                                type="radio"
+                                                checked={false}
+                                            />
+                                            <label title="text" htmlFor={`star${i + 1}`}></label>
                                         </>
                                     ))}
                                 </div>
@@ -179,10 +185,10 @@ export const InfoHotel = () => {
                     ))}
                 </div>
                 <div>
-                        <h3>Subir Imágenes del Hotel</h3>
-                        <input type="file" multiple onChange={handleFileChange} />
-                        <button onClick={handleUpload}>Subir</button>
-                    </div>
+                    <h3>Subir Imágenes del Hotel</h3>
+                    <input type="file" multiple onChange={handleFileChange} />
+                    <button onClick={handleUpload}>Subir</button>
+                </div>
                 <button className="backButton" onClick={handleHotelView}>
                     <div className="backButton-box">
                         <span className="backButton-elem">
@@ -202,21 +208,6 @@ export const InfoHotel = () => {
                     </div>
                 </button>
                 <hr className='line' />
-                <form className='check-form'>
-                    <div>
-                        <label>Check-in</label>
-                        <input type='text' placeholder='Add date' />
-                    </div>
-                    <div>
-                        <label>Check-out</label>
-                        <input type='text' placeholder='Add date' />
-                    </div>
-                    <div className='guest-field'>
-                        <label>Guest</label>
-                        <input type='text' placeholder='2 guest' />
-                    </div>
-                    <button type='submit'>Check Availablity</button>
-                </form>
 
                 <ul className='details-list'>
                     <li> <FaHome />  Entire Hotel
@@ -235,11 +226,11 @@ export const InfoHotel = () => {
                 <hr className='line' />
                 {!isLoading && selectedHotel.map((hotelItem, index) => (
                     <p className='home-desc'>
-                    {hotelItem.description}
-                </p>
+                        {hotelItem.description}
+                    </p>
                 ))}
 
-                
+
 
                 <ul className="wrapper">
                     <li className="icon facebook">
@@ -285,7 +276,9 @@ export const InfoHotel = () => {
                     </li>
                 </ul>
 
-                <hr className='line' />
+                {room.map((roomItem, index) => (
+                    <div key={index}>
+                        <hr className='line' />
                 <section className="rooms sec-width" id="rooms">
                     <div className="title">
                         <h2>Rooms</h2>
@@ -297,83 +290,17 @@ export const InfoHotel = () => {
                                 <img src={ImgDefault} alt="Luxury room with modern decor" />
                             </div>
                             <div className="room-text">
-                                <h3>Luxury Rooms</h3>
+                                <h3>{roomItem.nameRoom}</h3>
                                 <ul>
                                     <li>
                                         <i className="fas fa-arrow-alt-circle-right"></i>
-                                        <GiMeal />  Lorem ipsum dolor sit amet.
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
+                                        <GiMeal />  Comida variada
                                     </li>
                                 </ul>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus exercitationem repellendus maxime ullam tempore architecto provident unde expedita quam beatae, dolore eligendi molestias sint tenetur incidunt voluptas. Unde corporis qui iusto vitae. Aut nesciunt id iste, cum esse commodi nemo?</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla corporis quasi officiis cumque, fugiat nostrum sunt, tempora animi dicta laborum beatae ratione doloremque. Delectus odio sit eius labore, atque quo?</p>
+                                <p>{roomItem.description}</p>
+                                <p>{roomItem.category}</p>
                                 <p className="rate">
-                                    <span>Q99.00 /</span> Day
-                                </p>
-                                <button type="button" className="btnxddd">Book Now</button>
-                            </div>
-                        </article>
-
-                        <article className="room">
-                            <div className="room-image">
-                                <img src={ImgDefault} alt="Luxury room with ocean view" />
-                            </div>
-                            <div className="room-text">
-                                <h3>Luxury Rooms</h3>
-                                <ul>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus exercitationem repellendus maxime ullam tempore architecto provident unde expedita quam beatae, dolore eligendi molestias sint tenetur incidunt voluptas. Unde corporis qui iusto vitae. Aut nesciunt id iste, cum esse commodi nemo?</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla corporis quasi officiis cumque, fugiat nostrum sunt, tempora animi dicta laborum beatae ratione doloremque. Delectus odio sit eius labore, atque quo?</p>
-                                <p className="rate">
-                                    <span>Q99.00 /</span> Day
-                                </p>
-                                <button type="button" className="btnxddd">Book Now</button>
-                            </div>
-                        </article>
-
-                        <article className="room">
-                            <div className="room-image">
-                                <img src={ImgDefault} alt="Luxury room with city view" />
-                            </div>
-                            <div className="room-text">
-                                <h3>Luxury Rooms</h3>
-                                <ul>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        Lorem ipsum dolor sit amet.
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus exercitationem repellendus maxime ullam tempore architecto provident unde expedita quam beatae, dolore eligendi molestias sint tenetur incidunt voluptas. Unde corporis qui iusto vitae. Aut nesciunt id iste, cum esse commodi nemo?</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla corporis quasi officiis cumque, fugiat nostrum sunt, tempora animi dicta laborum beatae ratione doloremque. Delectus odio sit eius labore, atque quo?</p>
-                                <p className="rate">
-                                    <span>Q99.00 /</span> Day
+                                    <span>Q{roomItem.price} /</span> Day
                                 </p>
                                 <button type="button" className="btnxddd">Book Now</button>
                             </div>
@@ -381,6 +308,10 @@ export const InfoHotel = () => {
 
                     </div>
                 </section>
+                    </div>
+                ))}
+
+                
 
                 <div className="container-xd">
                     <div className="card-x">
@@ -499,7 +430,7 @@ export const InfoHotel = () => {
                 <div>
 
                 </div>
-                
+
             </div>
             <Fotter />
         </div>

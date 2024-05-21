@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { getHoteles, getHotelById, uploadImageRequestHotel } from "../../services/api.js";
+import { getHoteles, getHotelById, uploadImageRequestHotel, getRooms } from "../../services/api.js";
 
 export const useHotel = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [hotel, setHotel] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState([]);
+    const [room, setRoom] = useState([])
 
     const fetchHotels = async () => {
         try {
@@ -24,15 +25,12 @@ export const useHotel = () => {
 
     const getHotel = async (hotelId)=>{
         try {
-            console.log(hotelId)
             const response = await getHotelById(hotelId)
-            console.log(response.hotel)
             if (response.error) {
                 console.error('Error al obtener el Hotel:', response.error);
                 return;
             }
-            setSelectedHotel(response.hotel)
-            console.log(selectedHotel)
+            setSelectedHotel(response)
         } catch (err) {
             console.error("Error obteniendo el hotel", err)
             
@@ -62,17 +60,31 @@ export const useHotel = () => {
         }
     };
 
-    useEffect(() => {
-        if (selectedHotel) {
-          console.log(selectedHotel);
+    const getRoomsHotel = async (hotelId) => {
+        setIsLoading(true);
+        try {
+            const response = await getRooms(hotelId);
+            console.log(response.data.rooms)
+            if (response.error) {
+                console.error('Error al obtener las habitaciones:', response);
+                return;
+            }
+            setRoom(response.data.rooms);
+        } catch (err) {
+            console.error("Error obteniendo las habitaciones", err);
+        } finally {
+            setIsLoading(false);
         }
-      }, [selectedHotel]);
+    };
+    
 
     useEffect(() => {
         fetchHotels();
     }, []);
 
-    return { hotel, isLoading, getHotel, selectedHotel, uploadHotelImages };
+    return { hotel, isLoading, getHotel, selectedHotel, uploadHotelImages, getRoomsHotel, room };
 };
+
+
 
 

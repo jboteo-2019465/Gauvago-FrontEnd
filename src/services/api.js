@@ -73,9 +73,6 @@ export const registerHotelRequest = async (hotel) => {
     try {
         const authToken = localStorage.getItem('authToken');
         if (!authToken) throw new Error('Unauthorized: Missing Token');
-        
-        // Paso 1: Verificar el token de autenticación
-        console.log("AuthToken:", authToken);
 
         const response = await apiClient.post('/hotel/request/register', hotel, {
             headers: {
@@ -124,13 +121,13 @@ export const getLoggedUser = async () => {
 
 export const updateUserRequest = async (userData) => {
     try {
-      const response = await apiClient.put('/user/update', userData, {
+      return response = await apiClient.put('/user/update', userData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': localStorage.getItem('authToken') // Obtener el token del localStorage
         }
     });
-      return response.data;
+      
     } catch (error) {
       console.error('Error updating user:', error);
       throw error;
@@ -176,9 +173,8 @@ export const getDepartments = async () => {
 //Datos de un solo hotel
 export const getHotelById = async (hotelId) => {
     try {
-        console.log(hotelId)
-        const response = await apiClient.post('/hotel/search', {search: hotelId});
-        return response.data
+        const response = await apiClient.post('/hotel/search', {searchId: hotelId});
+        return response.data.hotels
     } catch (error) {
         console.error('Error obteniendo los detalles del hotel:', error);
         return {
@@ -198,10 +194,25 @@ export const uploadImageRequestHotel = async (hotelId, formData) => {
             }
         });
 
-        // Devuelve la respuesta del backend
         return response.data;
     } catch (error) {
         console.error('Error uploading image:', error);
         throw error;
     }
 };
+
+//Obtener rooms de un hotel
+export const getRooms = async (hotelId) => {
+    try {
+        console.log(hotelId)
+        const response = await apiClient.post('/room/searchR', {searchId: hotelId});
+        console.log(response)
+        return response
+        
+        
+    } catch (error) {
+        console.error('Error getting rooms', error);
+        throw error
+        
+    }
+}

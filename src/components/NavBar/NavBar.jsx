@@ -16,9 +16,6 @@ export const NavBar = () => {
   const admHotel = getIdFromToken()
 
 
-  
-
-
   const handleScroll = () => {
     if (window.scrollY > 0) {
       setScrolled(true);
@@ -40,16 +37,14 @@ export const NavBar = () => {
     navigate('/login');
   };
 
-  const handleMyHotel = () =>{
-    if (selectedHotel && selectedHotel.length > 0) {
+  const handleMyHotel = () => {
+    if (selectedHotel && selectedHotel[0]) {
       const id = selectedHotel[0]._id;
       navigate(`/InfoHotel/${id}`);
-  } else {
-      // Manejo de caso en el que no se encuentra ningún hotel seleccionado
-      // Puede mostrar un mensaje de error o realizar otra acción apropiada.
-  }
-
-  }
+    } else {
+      console.log('Hotel no encontrado');
+    }
+};
 
   const toggleDropdown = () => {
     setDropdownActive(!dropdownActive);

@@ -48,7 +48,7 @@ export const UserProfile = () => {
   const handleEdit = () => {
     setEditMode(true);
     if (user && user.userLogged) {
-      console.log(editMode)
+      console.log(editMode)                                           
       setUserData({
         ...userData,
         oldPassword: '',

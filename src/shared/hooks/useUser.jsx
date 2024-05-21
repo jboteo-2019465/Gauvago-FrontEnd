@@ -28,7 +28,6 @@ export const useUser = () => {
         setError(null);
         try {
             const response = await updateUserRequest(userData);
-            console.log(userData)
             console.log(response)
             setUser(response.updatedUser);
             setLoading(false);
