@@ -10,7 +10,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useHotel } from '../../shared/hooks/useHotel.jsx';
-
 import { useUser } from '../../shared/hooks/useUser.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useReview } from '../../shared/hooks/useReview.jsx';
@@ -30,8 +29,6 @@ export const InfoHotel = () => {
     const handleHotelView = () => {
         navigate('/HotelView');
     };
-        navigate('/HotelView')
-    }
 
     const handleReservation = () => {
         navigate('/Reservation')
@@ -435,4 +432,5 @@ export const InfoHotel = () => {
             </div>
             <Fotter />
         </div>
-    )
+    ) 
+}  
