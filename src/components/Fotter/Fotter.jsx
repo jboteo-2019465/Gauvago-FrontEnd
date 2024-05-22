@@ -1,10 +1,14 @@
 import './Fotter.css'
 import logo from '../../assets/img/logoss.svg'
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
 
 export const Fotter = () => {
     const navigate = useNavigate();
+    const token = localStorage.getItem('authToken');
+    const decodedToken = jwtDecode(token);
+    
 
     const handleRegisterHotel = () => {
         navigate('/register-hotel')
@@ -55,7 +59,10 @@ export const Fotter = () => {
                                 <span onClick={handleHome}>Home</span>
                                 <span href=''>About</span>
                                 <span href=''>Reservation</span>
-                                <span onClick={handleRegisterHotel}>Register Hotel</span>
+                                {decodedToken.role === 'ADMIN' && (
+                                    <span onClick={handleRegisterHotel}>Register Hotel</span>
+                                )}
+                                
                             </div>
                         </div>
                     </div>

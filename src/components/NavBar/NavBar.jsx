@@ -49,7 +49,7 @@ export const NavBar = () => {
     } else {
       console.log('Hotel no encontrado');
     }
-};
+  };
 
   const toggleDropdown = () => {
     setDropdownActive(!dropdownActive);
@@ -71,31 +71,31 @@ export const NavBar = () => {
             <li><a onClick={handleHome}>Home</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Projects</a></li>
-            <li><a href="#">About</a></li>            
+            <li><a href="#">About</a></li>
           </ul>
         </nav>
         {!loading && user && user.userLogged && (
-            <div>
-              <div className="btn" onClick={toggleDropdown}>
-          
-          <button><img className='imgButton' src={ user.userLogged.profileImageUrl || imgPerfil} alt="Profile" /></button>
-          <div className={`dropdown ${dropdownActive ? 'active' : ''}`}>
-            <ul className="dropdown-content">
-              <li><span className='btn-perfil' onClick={handleUser}>Profile</span></li>
-              <li><span className='btn-perfil'>Settings</span></li>
-              
-                {user.userLogged.role === 'ADMINHOTEL' && (
-                  <li><span className='btn-perfil' onClick={handleMyHotel}>MyHotel</span></li>
-                )}
-              
-            
-              <li><span className='btn-perfil' onClick={handleLogout}>LogOut</span></li>
-            </ul>
-          </div>
-        </div>
+          <div>
+            <div className="btn" onClick={toggleDropdown}>
+
+              <button><img className='imgButton' src={user.userLogged.profileImageUrl || imgPerfil} alt="Profile" /></button>
+              <div className={`dropdown ${dropdownActive ? 'active' : ''}`}>
+                <ul className="dropdown-content">
+                  <li><span className='btn-perfil' onClick={handleUser}>Profile</span></li>
+                  <li><span className='btn-perfil'>Settings</span></li>
+
+                  {user.userLogged.role === 'ADMINHOTEL' && (
+                    <li><span className='btn-perfil' onClick={handleMyHotel}>MyHotel</span></li>
+                  )}
+
+
+                  <li><span className='btn-perfil' onClick={handleLogout}>LogOut</span></li>
+                </ul>
+              </div>
             </div>
-          )}
-        
+          </div>
+        )}
+
       </header>
     </div>
   );
