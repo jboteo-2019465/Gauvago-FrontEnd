@@ -22,7 +22,7 @@ export const AppRoutes = () => {
                 <Route path="/register-hotel" element={<RegisterHotel/>} />
                 <Route path="/hotelsRequests" element={<HotelRequest/>} />
                 <Route path="/" element={<Navigate to="/login" />} />{/*Redirigue a la pagina de login si no hay ruta especificada */}
-                <Route path='/Reservation' element={<Reservation /> }/>
+                <Route path='/Reservation/:id' element={<Reservation /> }/>
             </Routes>
         </Router>
     );

@@ -30,8 +30,8 @@ export const InfoHotel = () => {
         navigate('/HotelView');
     };
 
-    const handleReservation = () => {
-        navigate('/Reservation')
+    const handleReservation = (roomId) => {
+        navigate(`/Reservation/${roomId}`);
     }
 
     const nextItem = () => {
@@ -276,7 +276,7 @@ export const InfoHotel = () => {
                                         <p className="rate">
                                             <span>Q{roomItem.price} /</span> Day
                                         </p>
-                                        <button type="button" className="btnxddd" onClick={handleReservation}>Book Now</button>
+                                        <button type="button" className="btnxddd" onClick={() => handleReservation(roomItem._id)}>Book Now</button>
                                     </div>
                                 </article>
 

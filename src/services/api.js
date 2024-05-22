@@ -218,12 +218,19 @@ export const getRooms = async (hotelId) => {
 }
 
 //Generar reservacion
-export const createReservation = async () => {
+export const createReservation = async (reservationData) => {
     try {
-        const response = await apiClient.post('/reservation/new')
+        const response = await apiClient.post('/reservation/new', reservationData, {
+            headers: {
+                'Authorization': localStorage.getItem('authToken')
+            }})
+        return response.data
     } catch (error) {
         console.error('Error creating reservation', error);
-        throw error
+        return {
+            error: true,
+            errorDetails: error.config
+        };
     }
 }
 
