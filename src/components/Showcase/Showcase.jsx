@@ -19,6 +19,11 @@ export const Showcase = () => {
     navigate('/HotelView')
   }
 
+  const handleInfoHotel = (id) => {
+    navigate(`/InfoHotel/${id}`)
+}
+
+
   console.log('Hotel in Showcase:', hotel);
 
   return (
@@ -57,7 +62,7 @@ export const Showcase = () => {
                   <h4>{hotelItem.nameHotel}</h4>
                   <p>{hotelItem.description}</p>
                   <h5>from {hotelItem.address}</h5>
-                  <button className="btn">Book Now</button>
+                  <button className="btn" onClick={() => handleInfoHotel(hotelItem._id)}>Book Now</button>
                 </div>
               </div>
             ))}

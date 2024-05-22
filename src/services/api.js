@@ -217,6 +217,16 @@ export const getRooms = async (hotelId) => {
     }
 }
 
+//Generar reservacion
+export const createReservation = async () => {
+    try {
+        const response = await apiClient.post('/reservation/new')
+    } catch (error) {
+        console.error('Error creating reservation', error);
+        throw error
+    }
+}
+
 //Hacer una review
 export const registerReview = async (reviewData, token) => {
     try {

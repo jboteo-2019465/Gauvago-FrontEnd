@@ -10,6 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useHotel } from '../../shared/hooks/useHotel.jsx';
+
 import { useUser } from '../../shared/hooks/useUser.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useReview } from '../../shared/hooks/useReview.jsx';
@@ -29,6 +30,12 @@ export const InfoHotel = () => {
     const handleHotelView = () => {
         navigate('/HotelView');
     };
+        navigate('/HotelView')
+    }
+
+    const handleReservation = () => {
+        navigate('/Reservation')
+    }
 
     const nextItem = () => {
         let nextIndex = itemActive + 1;
@@ -272,7 +279,7 @@ export const InfoHotel = () => {
                                         <p className="rate">
                                             <span>Q{roomItem.price} /</span> Day
                                         </p>
-                                        <button type="button" className="btnxddd">Book Now</button>
+                                        <button type="button" className="btnxddd" onClick={handleReservation}>Book Now</button>
                                     </div>
                                 </article>
 
@@ -281,6 +288,7 @@ export const InfoHotel = () => {
                     </div>
                 ))}
 
+                <hr className='line' />
                 <form onSubmit={handleReviewSubmit} className="review-form-container">
                     <div className="review-form">
                         <h2>Dejar una Reseña</h2>
@@ -303,9 +311,9 @@ export const InfoHotel = () => {
                         <button type="submit" disabled={isReviewLoading}>Enviar Reseña</button>
                     </div>
                 </form>
-                
+                <hr className='line' />
 
-                <hr className='line' /><hr className='line' />
+
                 <div className="container-xd">
                     <div className="card-x">
                         <div className="stars">
