@@ -257,8 +257,7 @@ export const registerReview = async (reviewData, token) => {
 export const acceptHotelRequest = async (nameHotel) => {
     console.log(nameHotel)
     try {
-      const response = await apiClient.post(
-        '/hotel/register',
+      const response = await apiClient.post('/hotel/register',
         { nameHotel: nameHotel }, // Pasar el nombre del hotel directamente en el cuerpo de la solicitud
         {
           headers: {
@@ -276,8 +275,7 @@ export const acceptHotelRequest = async (nameHotel) => {
   export const denyHotelRequest = async (nameHotel) => {
     console.log(nameHotel)
     try {
-      const response = await apiClient.delete(
-        '/hotel/request/delete',
+      const response = await apiClient.delete('/hotel/request/delete',
         {
           data: { nameHotel: nameHotel }, // Pasar el nombre del hotel como parte del cuerpo de la solicitud
           headers: {
