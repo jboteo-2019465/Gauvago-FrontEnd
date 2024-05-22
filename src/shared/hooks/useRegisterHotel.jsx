@@ -20,15 +20,15 @@ const removeAuthToken = () => {
 export const useRegisterHotel = () => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const registerHotel = async (nameHotel, description, address, phoneHotel, email, stars) => {
+    const registerHotel = async (nameHotel, slogan, description, address, phoneHotel, email) => {
         setIsLoading(true);
         const hotel = {
             nameHotel,
+            slogan,
             description,
             address,
             phoneHotel,
-            email,
-            stars
+            email
         };
         const response = await registerHotelRequest(hotel);
         setIsLoading(false);

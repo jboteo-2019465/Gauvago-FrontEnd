@@ -7,7 +7,6 @@ import {
     descriptionValidationMessage,
     addressValidationMessage,
     phoneValidationMessage,
-    starsValidationMessage,
     validateEmail,
     validateName,
     validatePhone,
@@ -25,6 +24,11 @@ export const RegisterHotel = ({ switchHandler }) => {
 
     const [formData, setFormData] = useState({
         nameHotel: {
+            value: '',
+            isValid: false,
+            showError: false
+        },
+        slogan: {
             value: '',
             isValid: false,
             showError: false
@@ -48,21 +52,16 @@ export const RegisterHotel = ({ switchHandler }) => {
             value: '',
             isValid: false,
             showError: false
-        },
-        stars: {
-            value: '',
-            isValid: false,
-            showError: false
         }
     });
 
     const isSubmitButtonDisabled = 
         !formData.nameHotel.isValid ||
+        !formData.slogan.isValid ||
         !formData.description.isValid ||
         !formData.address.isValid ||
         !formData.phoneHotel.isValid ||
-        !formData.email.isValid ||
-        !formData.stars.isValid;
+        !formData.email.isValid ;
 
     const handleValueChange = (value, field) => {
         setFormData(prevData => ({
@@ -80,6 +79,8 @@ export const RegisterHotel = ({ switchHandler }) => {
             case 'nameHotel':
                 isValid = validateName(value);
                 break;
+            case 'slogan':
+                isValid = validateName(value)
             case 'description':
                 isValid = validateDescription(value);
                 break;
@@ -113,11 +114,11 @@ export const RegisterHotel = ({ switchHandler }) => {
         const adminToken = localStorage.getItem('authToken'); // Assumes token is the admin token
         await registerHotel(
             formData.nameHotel.value,
+            formData.slogan.value,
             formData.description.value,
             formData.address.value,
             formData.phoneHotel.value,
             formData.email.value,
-            formData.stars.value,
             adminToken
         );
     };
@@ -137,6 +138,16 @@ export const RegisterHotel = ({ switchHandler }) => {
                     type='text'
                     onBlurHandler={handleValidationOnBlur}
                     showErrorMessage={formData.nameHotel.showError}
+                    validationMessage={nameValidationMessage}
+                />
+                <Input
+                    field='slogan'
+                    label='Slogan'
+                    value={formData.slogan.value}
+                    onChangeHandler={handleValueChange}
+                    type='text'
+                    onBlurHandler={handleValidationOnBlur}
+                    showErrorMessage={formData.slogan.showError}
                     validationMessage={nameValidationMessage}
                 />
 
@@ -182,17 +193,6 @@ export const RegisterHotel = ({ switchHandler }) => {
                     onBlurHandler={handleValidationOnBlur}
                     showErrorMessage={formData.email.showError}
                     validationMessage={emailValidationMessage}
-                />
-
-                <Input
-                    field='stars'
-                    label='Stars'
-                    value={formData.stars.value}
-                    onChangeHandler={handleValueChange}
-                    type='number'
-                    onBlurHandler={handleValidationOnBlur}
-                    showErrorMessage={formData.stars.showError}
-                    validationMessage={starsValidationMessage}
                 />
 
                 <button
