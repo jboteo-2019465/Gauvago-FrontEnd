@@ -226,3 +226,13 @@ export const createReservation = async () => {
         throw error
     }
 }
+
+//Imprimir factura
+export const printBill =  async ()=>{
+    try {
+        const response = await apiClient.get('/bill/print')
+    } catch (error) {
+        console.error('Error', error);
+        throw error
+    }
+}
