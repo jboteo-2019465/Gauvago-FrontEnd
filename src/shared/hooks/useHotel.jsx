@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { getHoteles, getHotelById, uploadImageRequestHotel, getRooms } from "../../services/api.js";
+import { getHoteles, getHotelById, uploadImageRequestHotel, getRooms, acceptHotelRequest, denyHotelRequest, getHotelRequests } from "../../services/api.js";
 
 export const useHotel = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [hotel, setHotel] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState([]);
+    const [hotelRequests, setHotelRequests] = useState([]);
     const [room, setRoom] = useState([])
+    const [error, setError] = useState(null);
 
     const fetchHotels = async () => {
         try {
@@ -76,13 +78,51 @@ export const useHotel = () => {
             setIsLoading(false);
         }
     };
-    
 
+    const acceptRequest = async (nameHotel) => { // Modificar para aceptar el nombre del hotel
+        try {
+          setIsLoading(true);
+          await acceptHotelRequest(nameHotel); // Pasar el nombre del hotel
+          // Realizar alguna acción adicional si es necesario, como actualizar la lista de solicitudes de hotel
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
+      const denyRequest = async (nameHotel) => { // Modificar para aceptar el nombre del hotel
+        try {
+          setIsLoading(true);
+          await denyHotelRequest(nameHotel); // Pasar el nombre del hotel
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+    
+      
+
+      const fetchHotelRequests = async () => {
+        try {
+          setIsLoading(true);
+          const data = await getHotelRequests();
+          setHotelRequests(data);
+        } catch (error) {
+            console.error(error)
+          setError(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
     useEffect(() => {
         fetchHotels();
+        fetchHotelRequests()
     }, []);
 
-    return { hotel, isLoading, getHotel, selectedHotel, uploadHotelImages, getRoomsHotel, room };
+    return { hotel, isLoading, getHotel, selectedHotel, uploadHotelImages, getRoomsHotel, room, error, acceptRequest, denyRequest, hotelRequests, fetchHotelRequests };
 };
 
 
