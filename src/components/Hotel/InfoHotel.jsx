@@ -436,4 +436,3 @@ export const InfoHotel = () => {
             <Fotter />
         </div>
     )
-}
