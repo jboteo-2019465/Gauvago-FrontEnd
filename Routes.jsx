@@ -6,6 +6,7 @@ import { UserProfile } from './src/components/userProfile/UserProfile.jsx';
 import {RegisterHotel} from './src/components/Hotel/RegisterHotel.jsx'
 import {HotelView} from './src/components/Hotel/HotelViev.jsx';
 import { InfoHotel } from './src/components/Hotel/InfoHotel.jsx';
+import { Reservation } from './src/components/Reservation/Reservation.jsx';
 
 export const AppRoutes = () => {
     return (
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
                 <Route path='/InfoHotel/:id' element={<InfoHotel/>}/>
                 <Route path="/register-hotel" element={<RegisterHotel/>} />
                 <Route path="/" element={<Navigate to="/login" />} />{/*Redirigue a la pagina de login si no hay ruta especificada */}
+                <Route path='/Reservation' element={<Reservation /> }/>
             </Routes>
         </Router>
     );

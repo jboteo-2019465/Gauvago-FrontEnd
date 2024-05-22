@@ -17,6 +17,7 @@ import { useHotel } from '../../shared/hooks/useHotel.jsx';
 
 
 
+
 export const InfoHotel = () => {
     const navigate = useNavigate()
     const { id } = useParams();
@@ -27,6 +28,10 @@ export const InfoHotel = () => {
 
     const handleHotelView = () => {
         navigate('/HotelView')
+    }
+
+    const handleReservation = () => {
+        navigate('/Reservation')
     }
 
     const nextItem = () => {
@@ -207,22 +212,6 @@ export const InfoHotel = () => {
                         </span>
                     </div>
                 </button>
-                <hr className='line' />
-                <form className='check-form'>
-                    <div>
-                        <label>Check-in</label>
-                        <input type='date' placeholder='Add date' />
-                    </div>
-                    <div>
-                        <label>Check-out</label>
-                        <input type='date' placeholder='Add date' />
-                    </div>
-                    <div className='guest-field'>
-                        <label>Guest</label>
-                        <input type='number' placeholder='2 guest' />
-                    </div>
-                    <button type='submit'>Check Availablity</button>
-                </form>
                 <ul className='details-list'>
                     <li> <FaHome />  Entire Hotel
                         <span>You will have the hotel flat for you.</span>
@@ -316,7 +305,7 @@ export const InfoHotel = () => {
                                 <p className="rate">
                                     <span>Q{roomItem.price} /</span> Day
                                 </p>
-                                <button type="button" className="btnxddd">Book Now</button>
+                                <button type="button" className="btnxddd" onClick={handleReservation}>Book Now</button>
                             </div>
                         </article>
 
