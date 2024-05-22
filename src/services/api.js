@@ -227,6 +227,7 @@ export const createReservation = async () => {
     }
 }
 
+
 //Imprimir factura
 export const printBill =  async ()=>{
     try {
@@ -236,3 +237,72 @@ export const printBill =  async ()=>{
         throw error
     }
 }
+
+//Hacer una review
+export const registerReview = async (reviewData, token) => {
+    try {
+        const response = await apiClient.post('/review/register', reviewData, {
+            headers: {
+                'Authorization': localStorage.getItem('authToken')
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error registrando la reseña:', error);
+        throw error;
+    }
+};
+
+//Aceptar denegar un hotel
+export const acceptHotelRequest = async (nameHotel) => {
+    console.log(nameHotel)
+    try {
+      const response = await apiClient.post(
+        '/hotel/register',
+        { nameHotel: nameHotel }, // Pasar el nombre del hotel directamente en el cuerpo de la solicitud
+        {
+          headers: {
+            'Authorization': localStorage.getItem('authToken')
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error accepting hotel request:', error);
+      throw error;
+    }
+  };
+  
+  export const denyHotelRequest = async (nameHotel) => {
+    console.log(nameHotel)
+    try {
+      const response = await apiClient.delete(
+        '/hotel/request/delete',
+        {
+          data: { nameHotel: nameHotel }, // Pasar el nombre del hotel como parte del cuerpo de la solicitud
+          headers: {
+            'Authorization': localStorage.getItem('authToken')
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error denying hotel request:', error);
+      throw error;
+    }
+  };
+
+  export const getHotelRequests = async () => {
+    try {
+      const response = await apiClient.get('/hotel/request/view', {
+        headers: {
+            'Authorization': localStorage.getItem('authToken')
+        }
+    });
+      return response.data.hotelRequest;
+    } catch (error) {
+      console.error('Error getting hotel requests:', error);
+      throw error;
+    }
+  };
+

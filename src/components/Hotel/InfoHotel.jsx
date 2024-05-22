@@ -1,32 +1,35 @@
-import './InfoHotel.css'
-import { NavBar } from '../NavBar/NavBar'
-import ImgDefault from '../../assets/img/hotelLogin.jpg'
-import { FaHome } from "react-icons/fa";
+import './InfoHotel.css';
+import { NavBar } from '../NavBar/NavBar';
+import ImgDefault from '../../assets/img/hotelLogin.jpg';
+import { FaHome, FaLocationArrow, FaHeart } from "react-icons/fa";
 import { MdCleanHands } from "react-icons/md";
-import { FaLocationArrow } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import { Fotter } from '../Fotter/Fotter'
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { GiMeal } from "react-icons/gi";
+import { Fotter } from '../Fotter/Fotter';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
-import { useParams } from 'react-router-dom';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useHotel } from '../../shared/hooks/useHotel.jsx';
 
-
-
+import { useUser } from '../../shared/hooks/useUser.jsx';
+import { jwtDecode } from 'jwt-decode';
+import { useReview } from '../../shared/hooks/useReview.jsx';
 
 export const InfoHotel = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { id } = useParams();
     const [itemActive, setItemActive] = useState(0);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const { getHotel, selectedHotel, isLoading, uploadHotelImages, getRoomsHotel, room } = useHotel();
+    const { submitReview, isLoading: isReviewLoading, error: reviewError, successMessage: reviewSuccess } = useReview();
 
+    const token = localStorage.getItem('authToken');
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken ? decodedToken._id : null;
 
     const handleHotelView = () => {
+        navigate('/HotelView');
+    };
         navigate('/HotelView')
     }
 
@@ -35,13 +38,19 @@ export const InfoHotel = () => {
     }
 
     const nextItem = () => {
-        setItemActive((prevItemActive) => (prevItemActive + 1) % 5);
+        let nextIndex = itemActive + 1;
+        if (nextIndex >= selectedHotel[0].imageUrl.length) {
+            nextIndex = 0;
+        }
+        setItemActive(nextIndex);
     };
 
     const prevItem = () => {
-        setItemActive((prevItemActive) =>
-            prevItemActive === 0 ? 4 : prevItemActive - 1
-        );
+        let prevIndex = itemActive - 1;
+        if (prevIndex < 0) {
+            prevIndex = selectedHotel[0].imageUrl.length - 1;
+        }
+        setItemActive(prevIndex);
     };
 
     const handleFileChange = (e) => {
@@ -54,10 +63,21 @@ export const InfoHotel = () => {
         }
     };
 
+    const handleReviewSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const reviewData = {
+            rating: form.rating.value,
+            review: form.comment.value,
+            hotelR: id,
+        };
+        await submitReview(reviewData, token);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             await getHotel(id);
-            await getRoomsHotel(id); // Llamada a getRoomsHotel después de obtener el hotel
+            await getRoomsHotel(id);
         };
 
         fetchData();
@@ -76,84 +96,27 @@ export const InfoHotel = () => {
                     <br />
                     {!isLoading && selectedHotel.map((hotelItem, index) => (
                         <div key={index} className="row">
-                            <div class="slider">
-                                <div class="list">
-                                    <div className={`item ${itemActive === 0 ? 'active' : ''}`}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                        <div class="content">
-                                            <p>Hotel</p>
-                                            <h2>{hotelItem.nameHotel}</h2>
-                                            <p>
-                                                {hotelItem.slogan || "El lugar de tus sueños"}
-                                            </p>
+                            <div className="slider">
+                                <div className="list">
+                                    {hotelItem.imageUrl.map((image, imageIndex) => (
+                                        <div key={imageIndex} className={`item ${itemActive === imageIndex ? 'active' : ''}`}>
+                                            <img src={image || ImgDefault} />
+                                            <div className="content">
+                                                <p>Hotel</p>
+                                                <h2>{hotelItem.nameHotel}</h2>
+                                                <p>
+                                                    {hotelItem.slogan || "El lugar de tus sueños"}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={`item ${itemActive === 1 ? 'active' : ''}`}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                        <div class="content">
-                                            <p>Hotel</p>
-                                            <h2>{hotelItem.nameHotel}</h2>
-                                            <p>
-                                                {hotelItem.slogan || "El lugar de tus sueños"}
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                    <div className={`item ${itemActive === 2 ? 'active' : ''}`}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                        <div class="content">
-                                            <p>Hotel</p>
-                                            <h2>{hotelItem.nameHotel}</h2>
-                                            <p>
-                                                {hotelItem.slogan || "El lugar de tus sueños"}
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                    <div className={`item ${itemActive === 3 ? 'active' : ''}`}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                        <div class="content">
-                                            <p>Hotel</p>
-                                            <h2>{hotelItem.nameHotel}</h2>
-                                            <p>
-                                                {hotelItem.slogan || "El lugar de tus sueños"}
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                    <div className={`item ${itemActive === 4 ? 'active' : ''}`}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                        <div class="content">
-                                            <p>Hotel</p>
-                                            <h2>{hotelItem.nameHotel}</h2>
-                                            <p>
-                                                {hotelItem.slogan || "El lugar de tus sueños"}
-                                            </p>
-
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
-                                <div class="arrows">
-                                    <button id="prev" onClick={prevItem}><IoIosArrowBack /></button>
-                                    <button id="next" onClick={nextItem}><IoIosArrowForward /></button>
-                                </div>
-                                <div class="thumbnail">
-                                    <div className={`item ${itemActive === 0 ? 'active' : ''}`} onClick={() => setItemActive(0)}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                    </div>
-                                    <div className={`item ${itemActive === 1 ? 'active' : ''}`} onClick={() => setItemActive(1)}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                    </div>
-                                    <div className={`item ${itemActive === 2 ? 'active' : ''}`} onClick={() => setItemActive(2)}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                    </div>
-                                    <div className={`item ${itemActive === 3 ? 'active' : ''}`} onClick={() => setItemActive(3)}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                    </div>
-                                    <div className={`item ${itemActive === 4 ? 'active' : ''}`} onClick={() => setItemActive(4)}>
-                                        <img src={selectedHotel.imageUrl || ImgDefault} />
-                                    </div>
-
+                                <div className="thumbnail">
+                                    {hotelItem.imageUrl.map((image, imageIndex) => (
+                                        <div key={imageIndex} className={`item ${itemActive === imageIndex ? 'active' : ''}`} onClick={() => setItemActive(imageIndex)}>
+                                            <img src={image || ImgDefault} />
+                                        </div>
+                                    ))}
                                 </div>
                                 <div className="rating">
                                     {Array.from({ length: hotelItem.stars }, (_, i) => (
@@ -184,15 +147,8 @@ export const InfoHotel = () => {
                                     ))}
                                 </div>
                             </div>
-
-
                         </div>
                     ))}
-                </div>
-                <div>
-                    <h3>Subir Imágenes del Hotel</h3>
-                    <input type="file" multiple onChange={handleFileChange} />
-                    <button onClick={handleUpload}>Subir</button>
                 </div>
                 <button className="backButton" onClick={handleHotelView}>
                     <div className="backButton-box">
@@ -212,6 +168,26 @@ export const InfoHotel = () => {
                         </span>
                     </div>
                 </button>
+                {decodedToken.role === 'ADMINHOTEL' && (
+                    <div>
+
+                        <h3>Sube Imágenes de tu Hotel!</h3>
+
+                        <label for="file" class="custum-file-upload">
+                            <div class="icon">
+                            </div>
+                            <div class="text">
+                                <span>Click to upload image</span>
+                            </div>
+                            <input onChange={handleFileChange} id="file" type="file" />
+                            <button className="backButton" onClick={handleUpload}>up</button>
+                        </label>
+
+                    </div>
+                )}
+
+
+                <hr className='line' />
                 <ul className='details-list'>
                     <li> <FaHome />  Entire Hotel
                         <span>You will have the hotel flat for you.</span>
@@ -232,8 +208,6 @@ export const InfoHotel = () => {
                         {hotelItem.description}
                     </p>
                 ))}
-
-
 
                 <ul className="wrapper">
                     <li className="icon facebook">
@@ -282,39 +256,63 @@ export const InfoHotel = () => {
                 {room.map((roomItem, index) => (
                     <div key={index}>
                         <hr className='line' />
-                <section className="rooms sec-width" id="rooms">
-                    <div className="title">
-                        <h2>Rooms</h2>
-                    </div>
-                    <div className="rooms-container">
-
-                        <article className="room">
-                            <div className="room-image">
-                                <img src={ImgDefault} alt="Luxury room with modern decor" />
+                        <section className="rooms sec-width" id="rooms">
+                            <div className="title">
+                                <h2>Rooms</h2>
                             </div>
-                            <div className="room-text">
-                                <h3>{roomItem.nameRoom}</h3>
-                                <ul>
-                                    <li>
-                                        <i className="fas fa-arrow-alt-circle-right"></i>
-                                        <GiMeal />  Comida variada
-                                    </li>
-                                </ul>
-                                <p>{roomItem.description}</p>
-                                <p>{roomItem.category}</p>
-                                <p className="rate">
-                                    <span>Q{roomItem.price} /</span> Day
-                                </p>
-                                <button type="button" className="btnxddd" onClick={handleReservation}>Book Now</button>
-                            </div>
-                        </article>
+                            <div className="rooms-container">
 
-                    </div>
-                </section>
+                                <article className="room">
+                                    <div className="room-image">
+                                        <img src={ImgDefault} alt="Luxury room with modern decor" />
+                                    </div>
+                                    <div className="room-text">
+                                        <h3>{roomItem.nameRoom}</h3>
+                                        <ul>
+                                            <li>
+                                                <i className="fas fa-arrow-alt-circle-right"></i>
+                                                <GiMeal />  Comida variada
+                                            </li>
+                                        </ul>
+                                        <p>{roomItem.description}</p>
+                                        <p>{roomItem.category}</p>
+                                        <p className="rate">
+                                            <span>Q{roomItem.price} /</span> Day
+                                        </p>
+                                        <button type="button" className="btnxddd" onClick={handleReservation}>Book Now</button>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </section>
                     </div>
                 ))}
 
-                
+                <hr className='line' />
+                <form onSubmit={handleReviewSubmit} className="review-form-container">
+                    <div className="review-form">
+                        <h2>Dejar una Reseña</h2>
+                        {reviewError && <div className="error-message">{reviewError}</div>}
+                        {reviewSuccess && <div className="success-message">{reviewSuccess}</div>}
+                        <label>
+                            Calificación:
+                            <select name="rating" required>
+                                <option value="1">1 Estrella</option>
+                                <option value="2">2 Estrellas</option>
+                                <option value="3">3 Estrellas</option>
+                                <option value="4">4 Estrellas</option>
+                                <option value="5">5 Estrellas</option>
+                            </select>
+                        </label>
+                        <label>
+                            Comentario:
+                            <textarea name="comment" rows="4" required></textarea>
+                        </label>
+                        <button type="submit" disabled={isReviewLoading}>Enviar Reseña</button>
+                    </div>
+                </form>
+                <hr className='line' />
+
 
                 <div className="container-xd">
                     <div className="card-x">
@@ -438,4 +436,3 @@ export const InfoHotel = () => {
             <Fotter />
         </div>
     )
-}
